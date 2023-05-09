@@ -1,0 +1,10 @@
+:root {
+    --primary-color: #D23532;
+    --secondary-color: #251B4B;
+    --tertiary-color: #F29940;
+    --black-color: #0E0C0D;
+    --white-color: #FFFFFF;
+  
+    --header-font: 'IBM Plex Mono', monospace;
+    --body-font: 'Poppins', sans-serif;
+}

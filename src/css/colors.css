@@ -1,0 +1,7 @@
+#main {
+    background-color: var(--black-color);
+}
+
+#subtitle {
+    border-left: 0.5rem solid var(--white-color);
+}
