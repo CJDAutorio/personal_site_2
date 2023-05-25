@@ -48,12 +48,11 @@ function Landing() {
             wrapper='div'
             cursor={true}
             repeat={Infinity}
-            className='title header'
             className='title'
             style={{
             }}
           />
-          <h2 id='subtitle' className='header'>CJ D'Autorio - Web Designer and Recent Graduate.</h2>
+          <h2 id='subtitle'>CJ D'Autorio - Web Designer and Recent Graduate.</h2>
         </div>
         <HomeNav />
       </div>
