@@ -9,7 +9,7 @@ function WorkEdu() {
   return (
     <div id='work-edu' className='page'>
       <div className='page-header'>
-        <h1 className='header title'>WORK/EDU</h1>
+        <h1 className='header'>WORK/EDU</h1>
       </div>
       <div className='page-content'>
         <Fade bottom duration={1250} delay={0} opposite cascade>
