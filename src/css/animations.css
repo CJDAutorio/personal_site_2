@@ -1,0 +1,16 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+#title-holder {
+    animation: 1.5s ease fadeIn;
+}
+
+#tsparticles {
+    animation: 15s ease fadeIn;
+}

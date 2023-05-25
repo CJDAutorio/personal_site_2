@@ -1,7 +1,30 @@
-#main {
+#root, html, body {
     background-color: var(--black-color);
 }
 
 #subtitle {
     border-left: 0.5rem solid var(--white-color);
+}
+
+#landing {
+    /* background-color: var(--black-color); */
+}
+
+.page-content {
+    backdrop-filter: blur(0.5rem);
+    background-color: rgba(var(--black-color-numbers), 0.95);
+    box-shadow: 0 0 1rem #000;
+}
+
+.page-header {
+    box-shadow: 0 0 1rem #000;
+}
+
+#title-holder {
+    backdrop-filter: blur(0.25rem);
+    box-shadow: 0 0 1rem #000;
+}
+
+.title {
+    background-color: '#d23532';
 }

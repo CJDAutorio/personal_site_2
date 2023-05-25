@@ -1,0 +1,41 @@
+img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    transition: all 0.5s ease-out;
+}
+
+#portrait {
+    height: 12rem;
+    width: auto;
+    outline: solid var(--primary-color);
+    outline-offset: 0;
+    margin: 1rem;
+    display: block;
+    flex-grow: 0;
+    outline-offset: 0.5rem;
+    max-height: 25rem;
+}
+
+#pinglogo {
+    height: 12rem;
+    width: auto;
+    outline: solid var(--primary-color);
+    outline-offset: 0;
+    margin: 1rem;
+    display: block;
+    flex-grow: 0;
+    outline-offset: 0.5rem;
+    max-height: 25rem;
+}
+
+
+@media screen and (max-width: 1200px) {
+    #portrait {
+        height: 15rem;
+        width: auto;
+    }
+}
