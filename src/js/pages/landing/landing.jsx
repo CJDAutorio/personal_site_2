@@ -11,14 +11,10 @@ function Landing() {
   const emptyTypeDelay = 500;
   const startTypeDelay = 2000;
 
-  useEffect(() => {
-
-  });
-
   return (
     <div id='landing'>
       <div className='particle-container'>
-        <Particles />
+        {/* <Particles /> */}
       </div>
       <div id='title-holder'>
         <div>
@@ -53,6 +49,7 @@ function Landing() {
             cursor={true}
             repeat={Infinity}
             className='title header'
+            className='title'
             style={{
             }}
           />

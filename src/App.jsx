@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {Link, Route, Routes} from 'react-router-dom';
+import Particles from './js/pages/landing/components/particles';
 import Landing from './js/pages/landing/landing';
 import AboutMe from './js/pages/aboutMe/aboutMe';
 import WorkEdu from './js/pages/workEdu/workEdu';
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <div id='pages'>
+        <Particles />
         <Landing />
         <Fade bottom duration={1500} delay={0} opposite collapse>
           <div>
