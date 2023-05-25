@@ -37,21 +37,6 @@
     margin-bottom: 0;
 }
 
-.inline-button {
-    text-decoration: underline;
-    color: var(--primary-color);
-    transition: all 0.25s;
-}
-
-.inline-button:hover {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-radius: 0.5rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    text-decoration: none;
-}
-
 .entry-title {
     align-self: flex-start;
     font-family: var(--header-font);
