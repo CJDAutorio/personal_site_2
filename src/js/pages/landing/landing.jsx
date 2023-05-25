@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import Animations from './components/animations';
-import HomeNav from '../components/homenav';
-import Particles from '../components/particles';
+import HomeNav from './components/homenav';
+import Particles from './components/particles';
 
 
 function Landing() {

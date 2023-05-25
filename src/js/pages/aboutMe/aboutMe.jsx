@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Portrait from "../../assets/img/portrait.jpg";
-import PingLogo from "../../assets/img/pingidentity.png";
-import Resume from "../../assets/files/DAutorio-Resume.pdf";
+import Portrait from "../../../assets/img/portrait.jpg";
+import PingLogo from "../../../assets/img/pingidentity.png";
+import Resume from "../../../assets/files/DAutorio-Resume.pdf";
 import Fade from 'react-reveal/Fade';
 
 function AboutMe() {

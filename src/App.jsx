@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import {Link, Route, Routes} from 'react-router-dom';
-import Landing from './pages/landing/landing';
-import AboutMe from './pages/aboutMe/aboutMe';
-import WorkEdu from './pages/workEdu/workEdu';
+import Landing from './js/pages/landing/landing';
+import AboutMe from './js/pages/aboutMe/aboutMe';
+import WorkEdu from './js/pages/workEdu/workEdu';
 import Fade from 'react-reveal/Fade';
 import './css/App.css';
 
