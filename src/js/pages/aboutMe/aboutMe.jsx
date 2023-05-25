@@ -14,7 +14,7 @@ function AboutMe() {
 
       <div id='about-me' className='page'>
         <div className='page-header' id='aboutMe-header'>
-          <h1 className='header title'>ABOUT ME</h1>
+          <h1 className='header'>ABOUT ME</h1>
         </div>
         <div className='page-content' id='aboutMe-content'>
           <Fade bottom duration={1250} delay={0} opposite cascade>
