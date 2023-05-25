@@ -3,8 +3,9 @@
 .header {
     font-family: var(--header-font);
     color: var(--white-color);
-    font-size: 8rem;
+    font-size: 4rem;
     font-weight: 400;
+    background-color: var(--primary-color);
 }
 
 .subheader {
@@ -15,13 +16,17 @@
 }
 
 .title {
-    font-size: 10rem;
-    line-height: normal;
+    font-family: var(--header-font);
+    color: var(--white-color);
+    font-size: 8rem;
+    font-weight: 400;
     background-color: var(--primary-color);
 }
 
 #subtitle {
     /* font-size: 1.75vw; */
+    font-family: var(--header-font);
+    color: var(--white-color);
     font-size: 2rem;
     font-weight: 400;
     line-height: normal;
