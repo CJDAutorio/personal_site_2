@@ -5,8 +5,8 @@
     color: var(--white-color);
     font-size: 4rem;
     font-weight: 400;
-    background-color: var(--primary-color);
     padding-left: 10rem;
+    margin-bottom: 1rem;
 }
 
 .subheader {

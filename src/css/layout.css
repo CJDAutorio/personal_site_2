@@ -44,6 +44,7 @@ body, html {
 .page-header {
     margin-top: 3rem;
     box-shadow: 0 0 1rem #000;
+    background-color: var(--primary-color);
 }
 
 .page-content {
