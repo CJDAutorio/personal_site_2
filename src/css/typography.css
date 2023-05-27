@@ -6,6 +6,7 @@
     font-size: 4rem;
     font-weight: 400;
     background-color: var(--primary-color);
+    padding-left: 10rem;
 }
 
 .subheader {
@@ -103,6 +104,10 @@ li {
 
     .title {
         font-size: 12vw;
+    }
+
+    .header {
+        padding-left: 2.5%;
     }
 
     .subheader {
