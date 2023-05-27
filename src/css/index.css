@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Poppins:wght@400;600&display=swap');
 @import url('animations.css');
+@import url('components.css');
 @import url('images.css');
-@import url('typography.css');
-@import url('layout.css');
 @import url('inputs.css');
+@import url('layout.css');
+@import url('typography.css');
 @import url('pages/landing.css');
 @import url('pages/aboutme.css');
+@import url('pages/workedu.css');
