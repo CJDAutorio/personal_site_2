@@ -3,6 +3,7 @@ import Portrait from "../../../assets/img/portrait.jpg";
 import PingLogo from "../../../assets/img/pingidentity.png";
 import Resume from "../../../assets/files/DAutorio-Resume.pdf";
 import Fade from 'react-reveal/Fade';
+import Nav from '../../components/nav';
 
 function AboutMe() {
 
@@ -15,6 +16,7 @@ function AboutMe() {
       <div id='about-me' className='page'>
         <div className='page-header' id='aboutMe-header'>
           <h1 className='header'>ABOUT ME</h1>
+          <Nav />
         </div>
         <div className='page-content' id='aboutMe-content'>
           <Fade bottom duration={1250} delay={0} opposite cascade>
