@@ -19,16 +19,15 @@ function AboutMe() {
         <div className='page-content' id='aboutMe-content'>
           <Fade bottom duration={1250} delay={0} opposite cascade>
             <div className='section' id='aboutMe-greeting'>
-              <h2 className='subheader'>Hello!</h2>
+              <h2 className='subheader'>👋Hello!</h2>
               <div className='flex-content-row'>
                 <p id='greeting-body'>
                   Hello, and thank you for visiting my site! My name is CJ D’Autorio and
-                  I am currently a Computer Science major at the <span className='highlight'>University of North
-                    Carolina at Charlotte</span> with a concentration in Web and Mobile Application
-                  Development. I’m currently in my last semester of my bachelors degree and
-                  will graduate in May, 2023.
+                  I am a recently graduated Computer Science major at the <span className='highlight'>University of North
+                  Carolina at Charlotte</span> with a concentration in Web and Mobile Application
+                  Development.
                   <br /><br />
-                  If you’re in a rush you can quickly download my resume <a href={Resume} target="_blank" rel="noopener noreferrer" className='inline-button'>here</a>.
+                  If you’re in a rush you can quickly view or download my resume <a href={Resume} target="_blank" rel="noopener noreferrer" className='inline-button'>here</a>.
                 </p>
                 <img src={Portrait} alt="Me" id="portrait" />
               </div>
