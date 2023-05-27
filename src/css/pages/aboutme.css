@@ -22,7 +22,6 @@
     max-height: 25rem;
 }
 
-
 @media screen and (max-width: 1200px) {
     #portrait {
         height: 15rem;
