@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
+import Nav from '../../components/nav';
 
 function WorkEdu() {
 
@@ -10,6 +11,7 @@ function WorkEdu() {
     <div id='work-edu' className='page'>
       <div className='page-header'>
         <h1 className='header'>WORK/EDU</h1>
+        <Nav />
       </div>
       <div className='page-content'>
         <Fade bottom duration={1250} delay={0} opposite cascade>
