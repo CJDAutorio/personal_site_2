@@ -20,13 +20,13 @@ function App() {
         <Particles />
         <Landing />
         <Fade bottom duration={1500} delay={0} opposite>
-          <div>
+          <div id='aboutMeContainer'>
             <AboutMe />
           </div>
-          <div>
+          <div id='workEduContainer'>
             <WorkEdu />
           </div>
-          <div>
+          <div id='prevProjsContainer'>
             <PrevProjs />
           </div>
           <div id='hobbiesInterestsContainer'>
