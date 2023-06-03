@@ -183,3 +183,105 @@
         width: 100%;
     }
 }
+
+.navbar-desktop {
+    align-self: flex-end;
+    display: flex;
+    width: 100%;
+    max-width: 60rem;
+    max-height: 0;
+    /* flex-shrink: 0; */
+    flex-grow: 1;
+    column-gap: 0;
+}
+
+.navbar-mobile {
+    display: none;
+    flex-direction: column;
+    max-width: 60rem;
+}
+
+.nav-button {
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    /* line-height: 2rem; */
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    border: 0.125rem solid var(--primary-color);
+    cursor: pointer;
+    font-family: var(--body-font);
+    font-size: 1rem;
+    font-weight: 400;
+    width: 20rem;
+    height: 2rem;
+    transition: width ease 0.25s;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.nav-button:hover {
+    width: 25rem;
+}
+
+@media screen and (max-width: 1500px) {
+    .header {
+        align-self: flex-start;
+    }
+
+    .navbar-desktop {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    /* .nav-button {
+        font-size: 3vw;
+    } */
+}
+
+@media screen and (max-width: 1108px) {
+    .navbar-desktop {
+        display: none;
+    }
+
+    .navbar-mobile {
+        display: flex;
+        align-self: center;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-mobile .nav-button {
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-mobile .nav-mobile-dropdown, .navbar-mobile .nav-mobile-close {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 1.2rem;
+        /* margin: 0;
+        padding: 0; */
+        transition: all 0.3s ease;
+    }
+
+    .navbar-mobile .nav-mobile-close {
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-mobile .nav-button:hover {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        /* border: 0.125rem solid var(--white-color); */
+        /* box-shadow: inset 0 0 1rem var(--white-color);
+        box-shadow: inset -1px 0 0 red, inset 0 -1px 0 red, inset 1px 0 0 red, inset 0 1px 0 red; */
+    }
+
+    .navbar-mobile .nav-mobile-dropdown:hover, .navbar-mobile .nav-mobile-close:hover {
+        font-size: 1.5rem;
+    }
+}
