@@ -4,11 +4,13 @@ export default class Scroll {
     }
 
     scrollToElement(elementId = 'null') {
-        console.log('Scrolling to element with id', elementId);
         const element = document.getElementById(elementId);
 
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
+            console.log('Scrolling to element with id', elementId);
+        } else {
+            console.log('Error finding element with id', elementId);
         }
     }
 }
