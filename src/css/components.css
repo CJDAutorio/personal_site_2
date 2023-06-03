@@ -66,6 +66,10 @@
 
 .project-card .project-card-desc {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     padding: 0;
     margin: 0;
@@ -91,7 +95,7 @@
 }
 
 .project-card:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     height: 16rem;
     width: 87%;
     box-shadow: 0 0 2rem #000;
@@ -120,10 +124,48 @@
     /* font-size: 1.95rem; */
 }
 
-.project-card:hover .project-card-desc {
+.project-card:hover .project-card-desc, .project-card:hover .project-card-buttons a {
     opacity: 100%;
 }
 
+.project-card-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 50%;
+    justify-content: center;
+    justify-items: center;
+    column-gap: 15%;
+    margin-top: 1rem;
+    /* padding: 0 2rem; */
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.project-card-buttons a {
+    width: 8rem;
+    padding-top: 0.1rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 400;
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    border-radius: 0.25rem;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.project-card-buttons a:hover {
+    width: 9rem;
+    border-radius: 0.9rem;
+}
+
+/* .project-card-git-link {
+    justify-self: end;
+}
+
+.project-card-page-link {
+    justify-self: start;
+} */
 
 @media screen and (max-width: 1050px) {
     .project-card h3 {
