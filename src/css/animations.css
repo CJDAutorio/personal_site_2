@@ -14,3 +14,12 @@
 #tsparticles {
     animation: 15s ease fadeIn;
 }
+
+.no-height {
+    height: 0;
+    overflow: hidden;
+}
+
+.auto-height {
+    height: auto;
+}
