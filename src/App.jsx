@@ -5,6 +5,7 @@ import Landing from './js/pages/landing/landing';
 import AboutMe from './js/pages/aboutMe/aboutMe';
 import WorkEdu from './js/pages/workEdu/workEdu';
 import PrevProjs from './js/pages/previousProjects/prevProjects';
+import HobbiesInterests from './js/pages/hobbiesInterests/hobbiesInterests';
 import Fade from 'react-reveal/Fade';
 import './css/App.css';
 
@@ -27,6 +28,9 @@ function App() {
           </div>
           <div>
             <PrevProjs />
+          </div>
+          <div id='hobbiesInterestsContainer'>
+            <HobbiesInterests />
           </div>
         </Fade>
       </div>
