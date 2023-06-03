@@ -35,9 +35,9 @@ function App() {
         </Fade>
       </div>
 
-      <Routes>
+      {/* <Routes>
         <Route path='/aboutme' element={<AboutMe />}/>
-      </Routes>
+      </Routes> */}
     </>
   )
 }
