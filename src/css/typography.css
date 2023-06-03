@@ -5,8 +5,13 @@
     color: var(--white-color);
     font-size: 4rem;
     font-weight: 400;
-    padding-left: 10rem;
-    margin-bottom: 1rem;
+    margin: 0;
+    padding-left: 8rem;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    line-height: 3.25rem;
+    width: 100%;
+    /* align-self: flex-start; */
 }
 
 .subheader {
@@ -80,7 +85,14 @@ li {
     margin: 0.75rem 0;
 }
 
-@media screen and (max-width: 1200px) {
+
+@media screen and (max-width: 1500px) {
+    .header {
+        align-self: flex-start;
+    }
+}
+
+@media screen and (max-width: 1380px) {
     #subtitle {
       font-size: 3vw;
     }
