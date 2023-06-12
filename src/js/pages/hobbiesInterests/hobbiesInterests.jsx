@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Nav from '../../components/nav';
-import ProjectCard from '../../components/cards';
-import PawTracksScreen from "../../../assets/img/pawtracks-screenshot.png";
+import { LastFmCard } from '../../components/cards';
 
 function HobbiesInterests() {
 
