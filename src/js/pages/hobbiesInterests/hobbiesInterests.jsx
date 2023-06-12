@@ -16,7 +16,7 @@ function HobbiesInterests() {
           <div className='subsection'>
             <h2 className='subheader'>Music</h2>
             <LastFmCard
-              lastFmCardType={1}
+              lastFmCardType={2}
             />
           </div>
           <div className='subsection'>
