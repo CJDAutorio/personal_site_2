@@ -5,14 +5,8 @@ import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-function ProjectCard(props) {
+export const ProjectCard = (props) => {
     const projectCardId = props.projectId + '-project-card'
-
-    // useEffect(() => {
-    //     document.getElementById(projectCardId).addEventListener('click', () => {
-    //         window.open(props.projectLink, '_blank')
-    //     })
-    // });
 
     return (
         <div className='project-card' id={projectCardId}>
