@@ -83,39 +83,39 @@ export const LastFmCard = (props) => {
     // Gets recent track list from LastFM API
     function getRecentTracks() {
         axios.get(lastFmUrl.toString(), lastFmConfig)
-        .then((response) => {
-            if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
-                setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
-                console.log('response.data.recenttracks:', response.data.recenttracks);
-                setLoadingProgress(50);
-            } else {
-                console.log('error with response.data:', response.data);
-            }
-        })
-        .catch((error) => {
-            console.log('error:', error);
-        });
+            .then((response) => {
+                if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
+                    setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
+                    console.log('response.data.recenttracks:', response.data.recenttracks);
+                    setLoadingProgress(50);
+                } else {
+                    console.log('error with response.data:', response.data);
+                }
+            })
+            .catch((error) => {
+                console.log('error:', error);
+            });
     }
 
     // Gets most listened to tracks from LastFM API
     function getTopTracks() {
         axios.get(lastFmUrl.toString(), lastFmConfig)
-        .then((response) => {
-            if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
-                if (response.data.weeklytrackchart.track.length > maxSongCount) {
-                    setLastFmData(response.data.weeklytrackchart.track.slice(0, maxSongCount));
+            .then((response) => {
+                if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
+                    if (response.data.weeklytrackchart.track.length > maxSongCount) {
+                        setLastFmData(response.data.weeklytrackchart.track.slice(0, maxSongCount));
+                    } else {
+                        setLastFmData(response.data.weeklytrackchart.track);
+                    }
+                    console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
+                    setLoadingProgress(50);
                 } else {
-                    setLastFmData(response.data.weeklytrackchart.track);
+                    console.log('error with response.data.weeklytrackchart:', response.data.weeklytrackchart);
                 }
-                console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
-                setLoadingProgress(50);
-            } else {
-                console.log('error with response.data.weeklytrackchart:', response.data.weeklytrackchart);
-            }
-        })
-        .catch((error) => {
-            console.log('error:', error);
-        });
+            })
+            .catch((error) => {
+                console.log('error:', error);
+            });
     }
 
     // Get LastFm music list after delay
@@ -269,14 +269,14 @@ export const LastFmCard = (props) => {
 
     return (
         <div className='lastfm-card' id={lastFmCardId}>
-            <div className='lastfm-card-overlay' />
             <div className='lastfm-card-content'>
                 {isSongInfoLoaded ? (
                     <>
                         <h3 className='lastfm-card-title'>{title}</h3>
-                        <div className='lastfm-card-text'>
-                            {/* <TransitionGroup>
-                                <CSSTransition key={lastFmSongText.title} classNames='fade' timeout={300}> */}
+                        <div className='lastfm-card-text-wrapper'>
+                            <TransitionGroup>
+                                <CSSTransition key={lastFmSongText.title} classNames='fade' timeout={300}>
+                                    <div className='lastfm-card-text'>
                                         <h4 className='lastfm-card-songname'>{lastFmSongText.title}</h4>
                                         <h5 className='lastfm-card-artist'>{lastFmSongText.artist}</h5>
                                         <div className='lastfm-card-image-container'>
@@ -305,8 +305,9 @@ export const LastFmCard = (props) => {
                                                 <button className='lastfm-card-button-forward' onClick={() => { updateIndex(1) }}><BsFillCaretRightFill /></button>
                                             )}
                                         </div>
-                                {/* </CSSTransition>
-                            </TransitionGroup> */}
+                                    </div>
+                                </CSSTransition>
+                            </TransitionGroup>
                         </div>
                     </>
                 ) : (
