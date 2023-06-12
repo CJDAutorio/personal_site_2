@@ -5,9 +5,6 @@ import { LastFmCard } from '../../components/cards';
 
 function HobbiesInterests() {
 
-  useEffect(() => {
-  });
-
   return (
     <div id='hobbies-interests' className='page'>
       <div className='page-header'>
@@ -15,22 +12,15 @@ function HobbiesInterests() {
         <Nav />
       </div>
       <div className='page-content'>
-        <Fade bottom duration={1250} delay={0} opposite cascade>
-          <div className='flex-content-col'>
-            <div className='subsection'>
-              <div className='flex-content-row'>
-                <ProjectCard
-                  projectId='pawtracks'
-                  projectName='Senior Year Capstone - PawTracks'
-                  projectImage={PawTracksScreen}
-                  projectGitLink='https://github.com/g445g445/PawTracks'
-                  projectPageLink='https://stage.pawtracks.live/'
-                  projectDesc={
-                    <p>An online petsitter powered by TensorFlow which allows users to monitor their pet through a webcam or a mobile device.</p>
-                  }
-                />
-              </div>
-            </div>
+        <div className='flex-content-col'>
+          <div className='subsection'>
+            <h2 className='subheader'>Music</h2>
+            <LastFmCard
+              lastFmCardType={1}
+            />
+          </div>
+          <div className='subsection'>
+            <h2 className='subheader'>Sports and Activities</h2>
           </div>
         </Fade>
       </div>
