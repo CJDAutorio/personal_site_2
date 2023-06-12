@@ -2,6 +2,7 @@
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 100%;
     }
@@ -22,4 +23,26 @@
 
 .auto-height {
     height: auto;
+}
+
+.fade-enter {
+    opacity: 0;
+    transform: translateY(-35rem);
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity ease 300ms, transform linear 0ms;
+}
+
+.fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transform: translateY(35rem);
+    transition: opacity ease 300ms, transform linear 0ms;
 }
