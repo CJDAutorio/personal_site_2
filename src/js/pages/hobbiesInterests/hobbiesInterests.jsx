@@ -22,7 +22,7 @@ function HobbiesInterests() {
           <div className='subsection'>
             <h2 className='subheader'>Sports and Activities</h2>
           </div>
-        </Fade>
+        </div>
       </div>
     </div>
 
