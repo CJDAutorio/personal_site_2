@@ -184,6 +184,135 @@
     }
 }
 
+.lastfm-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lastfm-card-title {
+    margin: 0.5rem;
+    color: var(--white-color);
+    font-family: var(--header-font);
+    font-size: 2rem;
+    text-align: center;
+    justify-self: center;
+}
+
+.lastfm-card-text {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1rem;
+    height: 35rem;
+    width: 20rem;
+    padding: 1rem 3rem;
+    border: 1rem var(--primary-color);
+    border-radius: 1rem;
+    outline: 0.15rem solid var(--primary-color);
+    outline-offset: 0.25rem;
+    box-shadow: 0 0 1rem #000;
+    background: linear-gradient(45deg, rgb(210, 50, 74) 0%, rgba(210,53,50,1) 50%, rgb(210, 66, 50) 100%);
+    transition: all 0.2s ease;
+}
+
+.lastfm-card-text-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.lastfm-card-songname {
+    margin: 0 0.5rem;
+    color: var(--white-color);
+    font-family: var(--body-font);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: "-";
+    justify-self: center;
+    font-size: 100%;
+    height: 3rem;
+    width: 100%;
+}
+
+.lastfm-card-artist {
+    margin: 0 0.5rem;
+    color: var(--white-color);
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.lastfm-card-image-container {
+    margin: 0.5rem;
+    height: 300px;
+    width: 300px;
+    background-color: var(--black-color);
+    padding: 0.75rem;
+}
+
+.lastfm-card-image {
+    height: 300px;
+    width: 300px;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 0.3rem;
+}
+
+.lastfm-card-buttons {
+    display: relative;
+    width: 100%;
+    height: 2.25rem;
+}
+
+.lastfm-card-buttons button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--white-color);
+    transition: all 0.2s ease;
+}
+
+.lastfm-card-button-backward {
+    position: absolute;
+    left: 4rem;
+}
+
+.lastfm-card-button-forward {
+    position: absolute;
+    right: 4rem;
+}
+
+.lastfm-card-buttons button:hover {
+    font-size: 2.25rem;
+}
+
+.lastfm-card-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.25rem;
+    background-color: var(--black-color);
+}
+
+.lastfm-card-progress {
+    width: 100%;
+    height: 1rem;
+    background-color: var(--grey-color);
+    border: 0.25rem solid var(--grey-color);
+}
+
+.lastfm-card-progress-bar {
+    width: 1%;
+    height: 1rem;
+    background-color: var(--white-color);
+}
+
 .navbar-desktop {
     align-self: flex-end;
     display: flex;
