@@ -10,12 +10,23 @@ import Fade from 'react-reveal/Fade';
 import './css/App.css';
 
 function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    const handleLoad = () => {
+      setIsLoaded(true);
+    }
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    }
   }, []);
 
   return (
     <>
+    {isLoaded ? (
       <div id='pages'>
         <Particles />
         <Landing />
@@ -34,10 +45,11 @@ function App() {
           </div>
         </Fade>
       </div>
-
-      {/* <Routes>
-        <Route path='/aboutme' element={<AboutMe />}/>
-      </Routes> */}
+    ) : (
+      <div id='pages'>
+        {/* <p>Loading page...</p> */}
+      </div>
+    )}
     </>
   )
 }
