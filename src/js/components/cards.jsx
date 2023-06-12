@@ -40,23 +40,20 @@ export const LastFmCard = (props) => {
     const lastFmBaseUrl = process.env.LAST_FM_URL;
     const lastFmUrl = new URL(lastFmBaseUrl);
     const now = Date.now();
-    const weekAgo = (Date.now() - (60 * 60 * 24 * 7 * 1000));
+    const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
 
-    axiosThrottle.use(axios, { requestsPerSecond: 5 });
+    axiosThrottle.use(axios, { requestsPerSecond: 2 });
 
     switch (props.lastFmCardType) {
         case 1:
-            // console.log('from:', (Date.now() - (60 * 60 * 24 * 7 * 1000)), '\nto:', Date.now());
             lastFmCardId = 'lastfm-card-recent-tracks';
             params = {
                 'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'user.getRecentTracks',
                 'format': 'json',
-                'user': 'struggle__',
-                // 'from': (Date.now() - (60*60*24*7*1000)),
-                // 'to': Date.now()
+                'user': 'struggle__'
             }
-            title = 'Last 10 Tracks Listened To';
+            title = 'Last ' + maxSongCount + ' Tracks Listened To';
             break;
         case 2:
             lastFmCardId = 'lastfm-card-top-tracks';
@@ -65,10 +62,10 @@ export const LastFmCard = (props) => {
                 'method': 'user.getWeeklyTrackChart',
                 'format': 'json',
                 'user': 'struggle__',
-                'from': weekAgo,
-                'to': now
+                // 'from': weekAgo,
+                // 'to': now
             }
-            title = 'Top 10 Tracks This Week';
+            title = 'Top ' + maxSongCount + ' Tracks This Week';
             break;
         default:
             console.log('Invalid lastFmCardType:', props.lastFmCardType);
@@ -83,6 +80,44 @@ export const LastFmCard = (props) => {
         }
     };
 
+    // Gets recent track list from LastFM API
+    function getRecentTracks() {
+        axios.get(lastFmUrl.toString(), lastFmConfig)
+        .then((response) => {
+            if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
+                setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
+                console.log('response.data.recenttracks:', response.data.recenttracks);
+                setLoadingProgress(50);
+            } else {
+                console.log('error with response.data:', response.data);
+            }
+        })
+        .catch((error) => {
+            console.log('error:', error);
+        });
+    }
+
+    // Gets most listened to tracks from LastFM API
+    function getTopTracks() {
+        axios.get(lastFmUrl.toString(), lastFmConfig)
+        .then((response) => {
+            if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
+                if (response.data.weeklytrackchart.track.length > maxSongCount) {
+                    setLastFmData(response.data.weeklytrackchart.track.slice(0, maxSongCount));
+                } else {
+                    setLastFmData(response.data.weeklytrackchart.track);
+                }
+                console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
+                setLoadingProgress(50);
+            } else {
+                console.log('error with response.data.weeklytrackchart:', response.data.weeklytrackchart);
+            }
+        })
+        .catch((error) => {
+            console.log('error:', error);
+        });
+    }
+
     // Get LastFm music list after delay
     useEffect(() => {
         function delay(time) {
@@ -93,34 +128,10 @@ export const LastFmCard = (props) => {
             await delay(1000);
             switch (props.lastFmCardType) {
                 case 1:
-                    axios.get(lastFmUrl.toString(), lastFmConfig)
-                        .then((response) => {
-                            if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
-                                setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
-                                console.log('response.data.recenttracks:', response.data.recenttracks);
-                                setLoadingProgress(50);
-                            } else {
-                                console.log('error with response.data:', response.data);
-                            }
-                        })
-                        .catch((error) => {
-                            console.log('error:', error);
-                        });
+                    getRecentTracks();
                     break;
                 case 2:
-                    axios.get(lastFmUrl.toString(), lastFmConfig)
-                        .then((response) => {
-                            if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
-                                setLastFmData(response.data.weeklytrackchart.track.slice(0, maxSongCount));
-                                console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
-                                setLoadingProgress(50);
-                            } else {
-                                console.log('error with response.data:', response.data);
-                            }
-                        })
-                        .catch((error) => {
-                            console.log('error:', error);
-                        });
+                    getTopTracks();
                     break;
                 default:
                     console.log('error in getMusicList() switch');
@@ -128,7 +139,6 @@ export const LastFmCard = (props) => {
             }
         }
 
-        setLoadingProgress(50);
         getMusicList();
     }, []);
 
@@ -148,7 +158,7 @@ export const LastFmCard = (props) => {
                 lastListened: lastListened
             });
 
-            if (props.lastFmCardType === 1) {
+            if (props.lastFmCardType === 1 || props.lastFmCardType === 2) {
                 getAlbumCovers();
             } else {
                 for (let i = 0; i < lastFmData.length; i++) {
@@ -157,22 +167,24 @@ export const LastFmCard = (props) => {
                     setImageList(newImageList);
                     console.log('current image:', lastFmData[i].image[3]['#text']);
                 }
+                setLoadingProgress(100);
             }
+        } else {
+            setIsSongInfoLoaded(false);
         }
     }, [lastFmData]);
 
     // Get LastFm album covers if not already populated
     async function getAlbumCovers() {
-
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
 
         if (lastFmData.length > 0) {
             for (let i = 0; i < lastFmData.length; i++) {
-                const newLoadingProgress = loadingProgress + 5;
-                setLoadingProgress(newLoadingProgress);
                 await albumImageSearch(i);
+                const newLoadingProgress = Math.round(loadingProgress + ((i + 1) * (100 - loadingProgress) / lastFmData.length));
+                setLoadingProgress(newLoadingProgress);
             }
         }
 
@@ -249,7 +261,9 @@ export const LastFmCard = (props) => {
 
     // Handle loading progress
     useEffect(() => {
-        document.getElementById(lastFmCardLoadingId).style.width = loadingProgress + '%';
+        if (document.getElementById(lastFmCardLoadingId)) {
+            document.getElementById(lastFmCardLoadingId).style.width = loadingProgress + '%';
+        }
         console.log('loading progress:', loadingProgress);
     }, [loadingProgress]);
 
