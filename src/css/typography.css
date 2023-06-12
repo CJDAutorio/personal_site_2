@@ -64,7 +64,7 @@ p, ul {
     margin-bottom: 0;
 }
 
-h1::selection {
+h1::selection, h4::selection, h5::selection {
     background-color: var(--white-color);
     color: var(--primary-color);
 }
