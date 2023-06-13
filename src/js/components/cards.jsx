@@ -29,13 +29,14 @@ export const ProjectCard = (props) => {
 }
 
 export const LastFmCard = (props) => {
+    const [cardType, setCardType] = useState(2);
     const [lastFmData, setLastFmData] = useState({});
     const [lastFmSongText, setLastFmSongText] = useState({ title: "Unknown", artist: "Unknown", playCount: 0, lastListened: 0 });
     const [isSongInfoLoaded, setIsSongInfoLoaded] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
-    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title;
+    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, lastFmConfig;
     let maxSongCount = 10;
     const lastFmBaseUrl = process.env.LAST_FM_URL;
     const lastFmUrl = new URL(lastFmBaseUrl);
@@ -44,54 +45,89 @@ export const LastFmCard = (props) => {
 
     axiosThrottle.use(axios, { requestsPerSecond: 2 });
 
-    switch (props.lastFmCardType) {
-        case 1:
-            lastFmCardId = 'lastfm-card-recent-tracks';
-            params = {
-                'api_key': process.env.LAST_FM_API_KEY,
-                'method': 'user.getRecentTracks',
-                'format': 'json',
-                'user': 'struggle__'
-            }
-            title = 'Last ' + maxSongCount + ' Tracks Listened To';
-            break;
-        case 2:
-            lastFmCardId = 'lastfm-card-top-tracks';
-            params = {
-                'api_key': process.env.LAST_FM_API_KEY,
-                'method': 'user.getWeeklyTrackChart',
-                'format': 'json',
-                'user': 'struggle__',
-                // 'from': weekAgo,
-                // 'to': now
-            }
-            title = 'Top ' + maxSongCount + ' Tracks This Week';
-            break;
-        case 3:
-            lastFmCardId = 'lastfm-card-top-artists';
-            params = {
-                'api_key': process.env.LAST_FM_API_KEY,
-                'method': 'user.getWeeklyArtistChart',
-                'format': 'json',
-                'user': 'struggle__',
-                // 'from': weekAgo,
-                // 'to': now
-            }
-            title = 'Top ' + maxSongCount + ' Artists This Week';
-            break;
-        default:
-            console.log('Invalid lastFmCardType:', props.lastFmCardType);
-            break;
-    }
-    lastFmCardLoadingId = lastFmCardId + '-progress-bar';
-    lastFmCardBgId = lastFmCardId + '-bg';
-
-    let lastFmConfig = {
-        params: params,
-        headers: {
-            'user-agent': process.env.LAST_FM_USER_AGENT
+    // Sets variables based on card type
+    function initVariables() {
+        switch (cardType) {
+            case 1:
+                lastFmCardId = 'lastfm-card-recent-tracks';
+                params = {
+                    'api_key': process.env.LAST_FM_API_KEY,
+                    'method': 'user.getRecentTracks',
+                    'format': 'json',
+                    'user': 'struggle__'
+                }
+                title = 'Last ' + maxSongCount + ' Tracks Listened To';
+                break;
+            case 2:
+                lastFmCardId = 'lastfm-card-top-tracks';
+                params = {
+                    'api_key': process.env.LAST_FM_API_KEY,
+                    'method': 'user.getWeeklyTrackChart',
+                    'format': 'json',
+                    'user': 'struggle__',
+                    // 'from': weekAgo,
+                    // 'to': now
+                }
+                title = 'Top ' + maxSongCount + ' Tracks This Week';
+                break;
+            case 3:
+                lastFmCardId = 'lastfm-card-top-artists';
+                params = {
+                    'api_key': process.env.LAST_FM_API_KEY,
+                    'method': 'user.getWeeklyArtistChart',
+                    'format': 'json',
+                    'user': 'struggle__',
+                    // 'from': weekAgo,
+                    // 'to': now
+                }
+                title = 'Top ' + maxSongCount + ' Artists This Week';
+                break;
+            default:
+                console.log('Invalid lastFmCardType:', cardType);
+                break;
         }
-    };
+        lastFmCardLoadingId = lastFmCardId + '-progress-bar';
+        lastFmCardBgId = lastFmCardId + '-bg';
+    
+        lastFmConfig = {
+            params: params,
+            headers: {
+                'user-agent': process.env.LAST_FM_USER_AGENT
+            }
+        };
+    }
+    initVariables();
+
+    // Get LastFm music list after delay
+    useEffect(() => {
+        // initVariables();
+
+        setIsSongInfoLoaded(false);
+
+        function delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        }
+
+        async function getMusicList() {
+            await delay(1000);
+            switch (cardType) {
+                case 1:
+                    getRecentTracks();
+                    break;
+                case 2:
+                    getTopTracks();
+                    break;
+                case 3:
+                    getTopArtists();
+                    break;
+                default:
+                    console.log('error in getMusicList() switch');
+                    break;
+            }
+        }
+
+        getMusicList();
+    }, [cardType]);
 
     // Gets recent track list from LastFM API
     function getRecentTracks() {
@@ -100,7 +136,8 @@ export const LastFmCard = (props) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
                     console.log('response.data.recenttracks:', response.data.recenttracks);
-                    setLoadingProgress(50);
+                    setLoadingProgress(100);
+                    setIsSongInfoLoaded(true);
                 } else {
                     console.log('error with response.data:', response.data);
                 }
@@ -152,33 +189,6 @@ export const LastFmCard = (props) => {
             });
     }
 
-    // Get LastFm music list after delay
-    useEffect(() => {
-        function delay(time) {
-            return new Promise(resolve => setTimeout(resolve, time));
-        }
-
-        async function getMusicList() {
-            await delay(1000);
-            switch (props.lastFmCardType) {
-                case 1:
-                    getRecentTracks();
-                    break;
-                case 2:
-                    getTopTracks();
-                    break;
-                case 3:
-                    getTopArtists();
-                    break;
-                default:
-                    console.log('error in getMusicList() switch');
-                    break;
-            }
-        }
-
-        getMusicList();
-    }, []);
-
     // Set initial information and images on lastFmData update
     useEffect(() => {
         if (Object.keys(lastFmData).length > 0) {
@@ -195,7 +205,7 @@ export const LastFmCard = (props) => {
                 lastListened: lastListened
             });
 
-            if (props.lastFmCardType === 2 || props.lastFmCardType === 3) {
+            if (cardType === 2 || cardType === 3) {
                 getAlbumCovers();
             } else {
                 for (let i = 0; i < lastFmData.length; i++) {
@@ -356,6 +366,16 @@ export const LastFmCard = (props) => {
         }
     }, [currentIndex]);
 
+    // Update card type
+    function updateCardType(newCardType) {
+        if (cardType > 0 && cardType < 3) {
+            setCardType(newCardType);
+            setCurrentIndex(0);
+        } else {
+            console.log('error updating cardType');
+        }
+    }
+
     // Handle loading progress
     useEffect(() => {
         if (document.getElementById(lastFmCardLoadingId)) {
@@ -369,7 +389,15 @@ export const LastFmCard = (props) => {
             <div className='lastfm-card-content'>
                 {isSongInfoLoaded ? (
                     <>
-                        <h3 className='lastfm-card-title'>{title}</h3>
+                        <div className='lastfm-card-header'>
+                            {cardType > 1 && (
+                                <button className='lastfm-card-type-button-backward' onClick={() => { updateCardType(cardType - 1) }}><BsCaretLeftFill /></button>
+                            )}
+                            <h3 className='lastfm-card-title'>{title}</h3>
+                            {cardType < 3 && (
+                                <button className='lastfm-card-type-button-forward' onClick={() => { updateCardType(cardType + 1) }}><BsFillCaretRightFill /></button>
+                            )}
+                        </div>
                         <div className='lastfm-card-text-wrapper' id={lastFmCardBgId}>
                             <TransitionGroup>
                                 <CSSTransition key={lastFmSongText.title} classNames='fade' timeout={300}>
@@ -379,7 +407,7 @@ export const LastFmCard = (props) => {
                                         <div className='lastfm-card-image-container'>
                                             <img src={imageList[currentIndex]} className='lastfm-card-image' />
                                         </div>
-                                        {props.lastFmCardType === 1 ? (
+                                        {cardType === 1 ? (
                                             <>
                                                 <div className='lastfm-card-details'>
                                                     <p className='lastfm-card-artist'>Last Listened: {lastFmSongText.lastListened}</p>
