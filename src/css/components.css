@@ -215,10 +215,10 @@
     /* background: linear-gradient(45deg, #d2324a 0%, #d23532 50%, #d24232 100%); */
     /* background: linear-gradient(45deg, rgba(210,50,177,1) 0%, rgba(210,53,50,1) 50%, rgba(210,133,50,1) 100%); */
     /* background-image: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 25%, rgba(210,53,50,1) 50%, rgba(210,50,163,1) 75%, rgba(210,133,50,1) 100%); */
-    background: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 16%, rgba(210,53,50,1) 32%, rgba(210,95,50,1) 50%, rgba(210,53,50,1) 66%, rgba(210,50,177,1) 82%, rgba(146,50,210,1) 100%);
+    background: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 16%, rgba(210,53,50,1) 32%, rgba(210,111,50,1) 50%, rgba(210,50,80,1) 66%, rgba(210,50,177,1) 82%, rgba(146,50,210,1) 100%);
     background-size: 1000%;
-    background-position: 50% 0;
-    transition: all 0.5s ease, background-position 1.5s ease;
+    background-position: 0% 0;
+    transition: all 0.5s ease, background-position 1s ease;
 }
 
 .lastfm-card-text {
