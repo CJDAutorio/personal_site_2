@@ -88,7 +88,7 @@ export const LastFmCard = (props) => {
         }
         lastFmCardLoadingId = lastFmCardId + '-progress-bar';
         lastFmCardBgId = lastFmCardId + '-bg';
-    
+
         lastFmConfig = {
             params: params,
             headers: {
@@ -135,11 +135,11 @@ export const LastFmCard = (props) => {
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
-                    console.log('response.data.recenttracks:', response.data.recenttracks);
+                    // console.log('response.data.recenttracks:', response.data.recenttracks);
                     setLoadingProgress(100);
                     setIsSongInfoLoaded(true);
                 } else {
-                    console.log('error with response.data:', response.data);
+                    // console.log('error with response.data:', response.data);
                 }
             })
             .catch((error) => {
@@ -157,10 +157,10 @@ export const LastFmCard = (props) => {
                     } else {
                         setLastFmData(response.data.weeklytrackchart.track);
                     }
-                    console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
+                    // console.log('response.data.weeklytrackchart:', response.data.weeklytrackchart);
                     setLoadingProgress(50);
                 } else {
-                    console.log('error with response.data.weeklytrackchart:', response.data.weeklytrackchart);
+                    // console.log('error with response.data.weeklytrackchart:', response.data.weeklytrackchart);
                 }
             })
             .catch((error) => {
@@ -172,16 +172,13 @@ export const LastFmCard = (props) => {
     function getTopArtists() {
         axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
-                if (response.data.weeklyartistchart.artist && response.data.weeklyartistchart.artist.length > 0) {
-                    if (response.data.weeklyartistchart.artist.length > maxSongCount) {
-                        setLastFmData(response.data.weeklyartistchart.artist.slice(0, maxSongCount));
-                    } else {
-                        setLastFmData(response.data.weeklyartistchart.artist);
-                    }
-                    console.log('response.data.weeklyartistchart:', response.data.weeklyartistchart);
+                const artistData = response.data.weeklyartistchart.artist;
+                if (artistData && artistData.length > 0) {
+                    setLastFmData(artistData.slice(0, maxSongCount));
+                    // console.log('response.data.weeklyartistchart:', response.data.weeklyartistchart);
                     setLoadingProgress(50);
                 } else {
-                    console.log('error with response.data.weeklyartistchart:', response.data.weeklyartistchart);
+                    // console.log('error with response.data.weeklyartistchart:', response.data.weeklyartistchart);
                 }
             })
             .catch((error) => {
@@ -198,23 +195,39 @@ export const LastFmCard = (props) => {
             } else {
                 lastListened = 'Now';
             }
-            setLastFmSongText({
-                title: lastFmData[currentIndex].name,
-                artist: lastFmData[currentIndex].artist['#text'],
-                playCount: lastFmData[currentIndex].playcount,
-                lastListened: lastListened
-            });
 
-            if (cardType === 2 || cardType === 3) {
-                getAlbumCovers();
+            if (cardType === 3) {
+                setLastFmSongText({
+                    artist: lastFmData[currentIndex].name,
+                    playCount: lastFmData[currentIndex].playcount
+                });
             } else {
-                for (let i = 0; i < lastFmData.length; i++) {
-                    const newImageList = imageList;
-                    newImageList[i] = lastFmData[i].image[3]['#text'];
+                setLastFmSongText({
+                    title: lastFmData[currentIndex].name,
+                    artist: lastFmData[currentIndex].artist['#text'],
+                    playCount: lastFmData[currentIndex].playcount,
+                    lastListened: lastListened
+                });
+            }
+
+            const newImageList = Array(lastFmData.length).fill(Placeholder);
+            setImageList(newImageList);
+            switch (cardType) {
+                case 1:
+                    for (let i = 0; i < lastFmData.length; i++) {
+                        newImageList[i] = lastFmData[i].image[3]['#text'];
+                    }
                     setImageList(newImageList);
-                    console.log('current image:', lastFmData[i].image[3]['#text']);
-                }
-                setLoadingProgress(100);
+                    setLoadingProgress(100);
+                    break;
+                case 2:
+                    getAlbumCovers();
+                    break;
+                case 3:
+                    getArtistCovers();
+                    break;
+                default:
+                    break;
             }
         } else {
             setIsSongInfoLoaded(false);
@@ -223,6 +236,7 @@ export const LastFmCard = (props) => {
 
     // Get LastFm album covers if not already populated
     async function getAlbumCovers() {
+
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
@@ -259,11 +273,8 @@ export const LastFmCard = (props) => {
                             const newImageList = imageList;
                             newImageList[index] = response.data.track.album.image[3]['#text'];
                             setImageList(newImageList);
-                            console.log('album image found:', response.data.track.album.image[3]['#text']);
+                            // console.log('album image found:', response.data.track.album.image[3]['#text']);
                         } else {
-                            const newImageList = imageList;
-                            newImageList[index] = Placeholder;
-                            setImageList(newImageList);
                             console.log('album image not found for track:', response.data.track.name);
                         }
                     }
@@ -277,13 +288,14 @@ export const LastFmCard = (props) => {
 
     // Get LastFm artist covers if not already populated
     async function getArtistCovers() {
+
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
 
         if (lastFmData.length > 0) {
             for (let i = 0; i < lastFmData.length; i++) {
-                await topTrackSearch(i);
+                await topAlbumSearch(i);
                 const newLoadingProgress = Math.round(loadingProgress + ((i + 1) * (100 - loadingProgress) / lastFmData.length));
                 setLoadingProgress(newLoadingProgress);
             }
@@ -291,14 +303,13 @@ export const LastFmCard = (props) => {
 
         setIsSongInfoLoaded(true);
 
-        async function topTrackSearch(index) {
+        async function topAlbumSearch(index) {
             params = {
                 'api_key': process.env.LAST_FM_API_KEY,
-                'method': 'track.getInfo',
+                'method': 'artist.getTopAlbums',
                 'format': 'json',
-                'track': lastFmData[index].name,
-                'artist': lastFmData[index].artist['#text']
-            }
+                'artist': lastFmData[index].name
+            };
 
             lastFmConfig = {
                 params: params,
@@ -306,20 +317,16 @@ export const LastFmCard = (props) => {
                     'user-agent': process.env.LAST_FM_USER_AGENT
                 }
             };
+
             axios.get(lastFmUrl.toString(), lastFmConfig)
                 .then((response) => {
-                    if (response.data.track && Object.keys(response.data.track).length > 0) {
-                        if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
-                            const newImageList = imageList;
-                            newImageList[index] = response.data.track.album.image[3]['#text'];
-                            setImageList(newImageList);
-                            console.log('album image found:', response.data.track.album.image[3]['#text']);
-                        } else {
-                            const newImageList = imageList;
-                            newImageList[index] = Placeholder;
-                            setImageList(newImageList);
-                            console.log('album image not found for track:', response.data.track.name);
-                        }
+                    if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
+                        const newImageList = imageList;
+                        newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
+                        setImageList(newImageList);
+                        console.log('artist image found:', response.data.topalbums.album[0].image[3]['#text']);
+                    } else {
+                        console.log('artist image not found for artist:', lastFmData[index].name);
                     }
                 })
                 .catch((error) => {
@@ -352,12 +359,19 @@ export const LastFmCard = (props) => {
                 lastListened = 'Now';
             }
 
-            setLastFmSongText({
-                title: lastFmData[currentIndex].name,
-                artist: lastFmData[currentIndex].artist['#text'],
-                playCount: lastFmData[currentIndex].playcount,
-                lastListened: lastListened
-            });
+            if (cardType === 3) {
+                setLastFmSongText({
+                    artist: lastFmData[currentIndex].name,
+                    playCount: lastFmData[currentIndex].playcount,
+                });
+            } else {
+                setLastFmSongText({
+                    title: lastFmData[currentIndex].name,
+                    artist: lastFmData[currentIndex].artist['#text'] || 'Unknown',
+                    playCount: lastFmData[currentIndex].playcount,
+                    lastListened: lastListened
+                });
+            }
 
             if (document.getElementById(lastFmCardBgId)) {
                 const position = (currentIndex * 10);
@@ -367,12 +381,22 @@ export const LastFmCard = (props) => {
     }, [currentIndex]);
 
     // Update card type
-    function updateCardType(newCardType) {
-        if (cardType > 0 && cardType < 3) {
-            setCardType(newCardType);
-            setCurrentIndex(0);
+    function updateCardType(direction) {
+        if (direction > 0) {
+            setLoadingProgress(0);
+            if (cardType < 3) {
+                setCardType(cardType + 1);
+                setCurrentIndex(0);
+                const newImageList = Array(lastFmData.length).fill(Placeholder);
+                setImageList(newImageList);
+            }
         } else {
-            console.log('error updating cardType');
+            if (cardType > 1) {
+                setCardType(cardType - 1);
+                setCurrentIndex(0);
+                const newImageList = Array(lastFmData.length).fill(Placeholder);
+                setImageList(newImageList);
+            }
         }
     }
 
@@ -391,18 +415,20 @@ export const LastFmCard = (props) => {
                     <>
                         <div className='lastfm-card-header'>
                             {cardType > 1 && (
-                                <button className='lastfm-card-type-button-backward' onClick={() => { updateCardType(cardType - 1) }}><BsCaretLeftFill /></button>
+                                <button className='lastfm-card-type-button-backward' onClick={() => { updateCardType(0) }}><BsCaretLeftFill /></button>
                             )}
                             <h3 className='lastfm-card-title'>{title}</h3>
                             {cardType < 3 && (
-                                <button className='lastfm-card-type-button-forward' onClick={() => { updateCardType(cardType + 1) }}><BsFillCaretRightFill /></button>
+                                <button className='lastfm-card-type-button-forward' onClick={() => { updateCardType(1) }}><BsFillCaretRightFill /></button>
                             )}
                         </div>
                         <div className='lastfm-card-text-wrapper' id={lastFmCardBgId}>
                             <TransitionGroup>
-                                <CSSTransition key={lastFmSongText.title} classNames='fade' timeout={300}>
+                                <CSSTransition key={currentIndex} classNames='fade' timeout={500}>
                                     <div className='lastfm-card-text'>
-                                        <h4 className='lastfm-card-songname'>{lastFmSongText.title}</h4>
+                                        {cardType != 3 && (
+                                            <h4 className='lastfm-card-songname'>{lastFmSongText.title}</h4>
+                                        )}
                                         <h5 className='lastfm-card-artist'>{lastFmSongText.artist}</h5>
                                         <div className='lastfm-card-image-container'>
                                             <img src={imageList[currentIndex]} className='lastfm-card-image' />
