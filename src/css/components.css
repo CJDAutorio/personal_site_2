@@ -191,13 +191,46 @@
     align-items: center;
 }
 
+.lastfm-card-header {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.lastfm-card-header button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    /* color: var(--white-color); */
+    transition: all 0.2s ease;
+}
+
+.lastfm-card-header button:hover {
+    font-size: 2.5rem;
+    transition: all 0.2s ease;
+}
+
+.lastfm-card-type-button-backward {
+    position: relative;
+    color: var(--primary-color);
+}
+
+.lastfm-card-type-button-forward {
+    position: relative;
+    color: var(--primary-color);
+}
+
 .lastfm-card-title {
     margin: 0.5rem;
     color: var(--white-color);
     font-family: var(--header-font);
     font-size: 2rem;
     text-align: center;
-    justify-self: center;
+    padding: 0 3rem;
 }
 
 .lastfm-card-text-wrapper {
@@ -215,7 +248,8 @@
     /* background: linear-gradient(45deg, #d2324a 0%, #d23532 50%, #d24232 100%); */
     /* background: linear-gradient(45deg, rgba(210,50,177,1) 0%, rgba(210,53,50,1) 50%, rgba(210,133,50,1) 100%); */
     /* background-image: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 25%, rgba(210,53,50,1) 50%, rgba(210,50,163,1) 75%, rgba(210,133,50,1) 100%); */
-    background: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 16%, rgba(210,53,50,1) 32%, rgba(210,111,50,1) 50%, rgba(210,50,80,1) 66%, rgba(210,50,177,1) 82%, rgba(146,50,210,1) 100%);
+    /* background: linear-gradient(45deg, rgba(146,50,210,1) 0%, rgba(210,50,177,1) 16%, rgba(210,53,50,1) 32%, rgba(210,111,50,1) 50%, rgba(210,50,80,1) 66%, rgba(210,50,177,1) 82%, rgba(146,50,210,1) 100%); */
+    background: linear-gradient(45deg, rgba(210,111,50,1) 0%, rgba(210,53,50,1) 16%, rgba(210,50,177,1) 32%, rgba(165,50,210,1) 50%, rgba(210,50,177,1) 66%, rgba(210,50,80,1) 82%, rgba(210,111,50,1) 100%);
     background-size: 1000%;
     background-position: 0% 0;
     transition: all 0.5s ease, background-position 1s ease;
@@ -280,17 +314,19 @@
     background: none;
     border: none;
     font-size: 2rem;
-    color: var(--white-color);
+    /* color: var(--white-color); */
     transition: all 0.2s ease;
 }
 
 .lastfm-card-button-backward {
     position: absolute;
+    color: var(--white-color);
     left: 0rem;
 }
 
 .lastfm-card-button-forward {
     position: absolute;
+    color: var(--white-color);
     right: 0rem;
 }
 
@@ -312,13 +348,15 @@
     height: 1rem;
     background-color: var(--grey-color);
     border: 0.25rem solid var(--grey-color);
+    border-radius: 1rem;
 }
 
 .lastfm-card-progress-bar {
-    width: 1%;
+    width: 2%;
     height: 1rem;
     background-color: var(--white-color);
-    transition: all 0.1s ease;
+    border-radius: 1rem;
+    transition: all 0.5s ease;
 }
 
 .navbar-desktop {
