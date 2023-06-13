@@ -218,7 +218,8 @@
 
 .lastfm-card-text {
     width: 100%;
-    height: 100%;
+    height: 35rem;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -239,6 +240,7 @@
 }
 
 .lastfm-card-artist {
+    position: relative;
     margin: 0 0.5rem;
     color: var(--white-color);
     font-family: var(--body-font);
@@ -279,12 +281,12 @@
 
 .lastfm-card-button-backward {
     position: absolute;
-    left: 4rem;
+    left: 0rem;
 }
 
 .lastfm-card-button-forward {
     position: absolute;
-    right: 4rem;
+    right: 0rem;
 }
 
 .lastfm-card-buttons button:hover {
