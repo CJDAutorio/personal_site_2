@@ -1,0 +1,25 @@
+#hobby-cards {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1525px) {
+    #hobby-cards {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 50%;
+        height: 25rem;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    .card {
+        height: 20rem;
+    }
+}
