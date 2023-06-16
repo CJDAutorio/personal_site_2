@@ -4,6 +4,7 @@ import axiosThrottle from 'axios-request-throttle';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import ReactPlayer from 'react-player';
 
 export const ProjectCard = (props) => {
     const projectCardId = props.projectId + '-project-card'
@@ -19,8 +20,8 @@ export const ProjectCard = (props) => {
                 <div className='project-card-desc'>
                     {props.projectDesc}
                     <div className='project-card-buttons'>
-                        <a href={props.projectGitLink} target="_blank" rel="noopener noreferrer" className='project-card-git-link'>Github</a>
-                        <a href={props.projectPageLink} target="_blank" rel="noopener noreferrer" className='project-card-page-link'>Live Demo</a>
+                        <a href={props.projectGitLink} target='_blank' rel='noopener noreferrer' className='project-card-git-link'>Github</a>
+                        <a href={props.projectPageLink} target='_blank' rel='noopener noreferrer' className='project-card-page-link'>Live Demo</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +32,7 @@ export const ProjectCard = (props) => {
 export const LastFmCard = (props) => {
     const [cardType, setCardType] = useState(2);
     const [lastFmData, setLastFmData] = useState({});
-    const [lastFmSongText, setLastFmSongText] = useState({ title: "Unknown", artist: "Unknown", playCount: 0, lastListened: 0 });
+    const [lastFmSongText, setLastFmSongText] = useState({ title: 'Unknown', artist: 'Unknown', playCount: 0, lastListened: 0 });
     const [isSongInfoLoaded, setIsSongInfoLoaded] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -474,12 +475,22 @@ export const LastFmCard = (props) => {
 }
 
 export const Card = (props) => {
-    const cardId = props.cardId + '-card'
+    const cardId = props.cardId + '-card';
 
     return (
         <div className='card' id={cardId}>
-            <div className='card-image-container'>
-                <img src={props.cardImage} />
+            <div className='card-video-container'>
+                <ReactPlayer
+                    url={props.cardGraphic}
+                    playing={true}
+                    loop={true}
+                    muted={true}
+                    width='100%'
+                    height='auto'
+                    controls={false}
+                    style={{ objectFit: 'cover', transform: 'translate(0%, 0%)' }}
+                />
+                <div className='card-video-overlay'></div>
             </div>
             <div className='card-overlay' />
             <div className='card-text'>
