@@ -28,7 +28,7 @@ function Particles() {
           },
         },
         fullScreen: false,
-        fpsLimit: 144,
+        fpsLimit: 60,
         interactivity: {
           events: {
             onHover: {
