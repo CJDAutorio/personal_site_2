@@ -57,11 +57,18 @@
     font-size: 1.5rem;
 }
 
-p, ul {
+p, ul, label {
     font-size: 1.15rem;
     color: var(--white-color);
     font-family: var(--body-font);
     margin-bottom: 0;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--white-color);
+    font-family: var(--body-font);
+    font-weight: 400;
 }
 
 h1::selection, h4::selection, h5::selection {
@@ -69,8 +76,9 @@ h1::selection, h4::selection, h5::selection {
     color: var(--primary-color);
 }
 
-h2::selection, p::selection, br::selection, li::selection, h3::selection, b::selection {
+h2::selection, h3::selection, p::selection, br::selection, li::selection, h3::selection, b::selection, label::selection, input::selection, textarea::selection {
     background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
 a::selection, .highlight::selection, button::selection {
