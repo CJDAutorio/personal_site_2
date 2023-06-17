@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Portrait from "../../../assets/img/portrait.jpg";
-import PingLogo from "../../../assets/img/pingidentity.png";
-import Resume from "../../../assets/files/DAutorio-Resume.pdf";
+import Portrait from '../../../assets/img/portrait.jpg';
+import PingLogo from '../../../assets/img/pingidentity.png';
+import Resume from '../../../assets/files/DAutorio-Resume.pdf';
 import Fade from 'react-reveal/Fade';
 import Nav from '../../components/nav';
 
@@ -29,16 +29,16 @@ function AboutMe() {
                   Carolina at Charlotte</span> with a concentration in Web and Mobile Application
                   Development.
                   <br /><br />
-                  If you’re in a rush you can quickly view or download my resume <a href={Resume} target="_blank" rel="noopener noreferrer" className='inline-button'>here</a>.
+                  If you’re in a rush you can quickly view or download my resume <a href={Resume} target='_blank' rel='noopener noreferrer' className='inline-button'>here</a>.
                 </p>
-                <img src={Portrait} alt="Me" id="portrait" />
+                <img src={Portrait} alt='Me' id='portrait' />
               </div>
             </div>
             <hr />
             <div className='section' id='aboutMe-work'>
               <h2 className='subheader'>Where I’ve Worked</h2>
               <div className='flex-content-row'>
-                <img src={PingLogo} alt="Me" id="pinglogo" />
+                <img src={PingLogo} alt='Me' id='pinglogo' />
                 <p>
                   I spent the summer of 2022 working as a <span className='highlight'>Solutions Architect Intern
                     at Ping Identity in Denver, Colorado</span>. While at Ping, I helped out
