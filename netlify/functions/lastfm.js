@@ -13,8 +13,8 @@ exports.handler = async function (event, context) {
         'method': requestData.method,
         'user': requestData.user,
         'api_key': process.env.LAST_FM_API_KEY
-    }
-    // params.api_key = process.env.LAST_FM_API_KEY;
+    };
+    console.log('params:', params);
 
     let lastFmConfig = {
         params: params,
@@ -22,6 +22,7 @@ exports.handler = async function (event, context) {
             'user-agent': process.env.LAST_FM_USER_AGENT
         }
     };
+    console.log('lastFmConfig:', lastFmConfig);
 
     try {
         axios.get(lastFmUrl.toString(), lastFmConfig)
@@ -33,12 +34,14 @@ exports.handler = async function (event, context) {
                 }
             })
             .catch((error) => {
+                console.log('axios error:', error.message);
                 return {
                     statusCode: 500,
                     body: JSON.stringify({error: error.message})
                 }
             });
     } catch (error) {
+        console.log('function error:', error.message);
         return {
             statusCode: 500,
             body: JSON.stringify({error: error.message})
