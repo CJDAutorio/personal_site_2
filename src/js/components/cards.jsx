@@ -302,13 +302,6 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].name
             };
 
-            lastFmConfig = {
-                params: params,
-                headers: {
-                    'user-agent': process.env.LAST_FM_USER_AGENT
-                }
-            };
-
             search();
 
             async function search() {
