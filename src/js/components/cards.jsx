@@ -124,7 +124,7 @@ export const LastFmCard = (props) => {
 
     // Gets recent track list from LastFM API
     function getRecentTracks() {
-        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
+        axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -142,7 +142,7 @@ export const LastFmCard = (props) => {
 
     // Gets most listened to tracks from LastFM API
     function getTopTracks() {
-        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
+        axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -163,7 +163,7 @@ export const LastFmCard = (props) => {
 
     // Gets top artists from LastFM API
     function getTopArtists() {
-        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
+        axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -251,7 +251,7 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].artist['#text']
             }
 
-            axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
+            axios.get('/.netlify/functions/lastfm', netlifyConfig)
                 .then((response) => {
                     if (response.data.track && Object.keys(response.data.track).length > 0) {
                         if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
@@ -303,7 +303,7 @@ export const LastFmCard = (props) => {
                 }
             };
 
-            axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
+            axios.get('/.netlify/functions/lastfm', netlifyConfig)
                 .then((response) => {
                     if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                         const newImageList = imageList;
