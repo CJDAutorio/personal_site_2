@@ -53,15 +53,15 @@ const EmailForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateInputs && validateEmail) {
-            axios.post('http://localhost:5000/sendEmail', emailData)
-                .then(response => {
-                    console.log('Email sent successfully:', response);
-                    // Handle success if needed
-                })
-                .catch(error => {
-                    console.error('Failed to send email:', error);
-                    // Handle error if needed
-                });
+            // axios.post('http://localhost:5000/sendEmail', emailData)
+            //     .then(response => {
+            //         console.log('Email sent successfully:', response);
+            //         // Handle success if needed
+            //     })
+            //     .catch(error => {
+            //         console.error('Failed to send email:', error);
+            //         // Handle error if needed
+            //     });
         }
     }
 
