@@ -26,7 +26,7 @@ exports.handler = async function (event, context) {
 
     try {
         console.log('running axios get request');
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+        await axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
                 console.log('response.data:', response.data);
                 return {
