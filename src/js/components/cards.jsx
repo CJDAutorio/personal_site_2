@@ -129,11 +129,11 @@ export const LastFmCard = (props) => {
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
-                    // console.log('response.data.recenttracks:', response.data.recenttracks);
+                    console.log('response.data.recenttracks:', response.data.recenttracks);
                     setLoadingProgress(100);
                     setIsSongInfoLoaded(true);
                 } else {
-                    // console.log('error with response.data:', response.data);
+                    console.log('error with response.data:', response.data);
                 }
             })
             .catch((error) => {
