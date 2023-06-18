@@ -25,6 +25,7 @@ exports.handler = async function (event, context) {
     console.log('lastFmConfig:', lastFmConfig);
 
     try {
+        console.log('running axios get request');
         axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
                 console.log('response.data:', response.data);
@@ -34,14 +35,14 @@ exports.handler = async function (event, context) {
                 }
             })
             .catch((error) => {
-                console.log('axios error:', error.message);
+                console.error('axios error:', error.message);
                 return {
                     statusCode: 500,
                     body: JSON.stringify({error: error.message})
                 }
             });
     } catch (error) {
-        console.log('function error:', error.message);
+        console.error('function error:', error.message);
         return {
             statusCode: 500,
             body: JSON.stringify({error: error.message})
