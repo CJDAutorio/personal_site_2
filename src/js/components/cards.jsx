@@ -124,8 +124,8 @@ export const LastFmCard = (props) => {
     }, [cardType]);
 
     // Gets recent track list from LastFM API
-    function getRecentTracks() {
-        axios.get('/.netlify/functions/lastfm', netlifyConfig)
+    async function getRecentTracks() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -142,8 +142,8 @@ export const LastFmCard = (props) => {
     }
 
     // Gets most listened to tracks from LastFM API
-    function getTopTracks() {
-        axios.get('/.netlify/functions/lastfm', netlifyConfig)
+    async function getTopTracks() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -163,8 +163,8 @@ export const LastFmCard = (props) => {
     }
 
     // Gets top artists from LastFM API
-    function getTopArtists() {
-        axios.get('/.netlify/functions/lastfm', netlifyConfig)
+    async function getTopArtists() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -252,22 +252,27 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].artist['#text']
             }
 
-            axios.get('/.netlify/functions/lastfm', netlifyConfig)
-                .then((response) => {
-                    if (response.data.track && Object.keys(response.data.track).length > 0) {
-                        if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
-                            const newImageList = imageList;
-                            newImageList[index] = response.data.track.album.image[3]['#text'];
-                            setImageList(newImageList);
-                            // console.log('album image found:', response.data.track.album.image[3]['#text']);
-                        } else {
-                            console.log('album image not found for track:', response.data.track.name);
+            search();
+
+            async function search() {
+                await axios.get('/.netlify/functions/lastfm', netlifyConfig)
+                    .then((response) => {
+                        if (response.data.track && Object.keys(response.data.track).length > 0) {
+                            if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
+                                const newImageList = imageList;
+                                newImageList[index] = response.data.track.album.image[3]['#text'];
+                                setImageList(newImageList);
+                                // console.log('album image found:', response.data.track.album.image[3]['#text']);
+                            } else {
+                                console.log('album image not found for track:', response.data.track.name);
+                            }
                         }
-                    }
-                })
-                .catch((error) => {
-                    console.log('error:', error);
-                });
+                    })
+                    .catch((error) => {
+                        console.log('error:', error);
+                    });
+            }
+
             await delay(500);
         }
     }
@@ -304,20 +309,24 @@ export const LastFmCard = (props) => {
                 }
             };
 
-            axios.get('/.netlify/functions/lastfm', netlifyConfig)
-                .then((response) => {
-                    if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
-                        const newImageList = imageList;
-                        newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
-                        setImageList(newImageList);
-                        console.log('artist image found:', response.data.topalbums.album[0].image[3]['#text']);
-                    } else {
-                        console.log('artist image not found for artist:', lastFmData[index].name);
-                    }
-                })
-                .catch((error) => {
-                    console.log('error:', error);
-                });
+            search();
+
+            async function search() {
+                await axios.get('/.netlify/functions/lastfm', netlifyConfig)
+                    .then((response) => {
+                        if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
+                            const newImageList = imageList;
+                            newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
+                            setImageList(newImageList);
+                            console.log('artist image found:', response.data.topalbums.album[0].image[3]['#text']);
+                        } else {
+                            console.log('artist image not found for artist:', lastFmData[index].name);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('error:', error);
+                    });
+            }
             await delay(500);
         }
     }
