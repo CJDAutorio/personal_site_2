@@ -33,7 +33,7 @@ exports.handler = async function (event, context) {
                 console.log('response.data:', response.data);
                 return {
                     statusCode: 200,
-                    body: JSON.stringify(response.data)
+                    body: JSON.stringify({weeklytrackchart: response.data.weeklytrackchart})
                 }
             })
             .catch((error) => {
