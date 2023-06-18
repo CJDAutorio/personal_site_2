@@ -6,9 +6,6 @@ import PawTracksScreen from "../../../assets/img/pawtracks-screenshot.png";
 
 function PrevProjs() {
 
-  useEffect(() => {
-  });
-
   return (
     <div id='prev-proj' className='page'>
       <div className='page-header'>

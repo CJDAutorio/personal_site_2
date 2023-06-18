@@ -4,9 +4,6 @@ import Nav from '../../components/nav';
 
 function WorkEdu() {
 
-  useEffect(() => {
-  });
-
   return (
     <div id='work-edu' className='page'>
       <div className='page-header'>
