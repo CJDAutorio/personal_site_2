@@ -3,8 +3,8 @@ import Fade from 'react-reveal/Fade';
 import Nav from '../../components/nav';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import { LastFmCard, Card } from '../../components/cards';
-import FlagFootball from '../../../assets/video/flagfootball_crop.mp4';
-import Gym from '../../../assets/video/gym.mp4';
+import FlagFootball from '../../../assets/video/flagfootball.webm';
+import Gym from '../../../assets/video/gym.webm';
 
 function HobbiesInterests() {
 
