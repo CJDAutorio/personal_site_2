@@ -2,6 +2,8 @@ import axios, { isCancel, AxiosError } from 'axios';
 
 exports.handler = async function (event, context) {
     const requestData = JSON.parse(event.body);
+    console.log('requestData:', requestData);
+
     const lastFmBaseUrl = process.env.LAST_FM_URL;
     const lastFmUrl = new URL(lastFmBaseUrl);
     
@@ -15,13 +17,14 @@ exports.handler = async function (event, context) {
         }
     };
 
-    console.log('requestData:', requestData);
-
     try {
         axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
                 console.log('response.data:', response.data);
-                return response.data;
+                return {
+                    statusCode: 200,
+                    body: response.data
+                }
             })
             .catch((error) => {
                 return {
