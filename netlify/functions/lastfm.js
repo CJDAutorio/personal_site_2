@@ -15,9 +15,12 @@ exports.handler = async function (event, context) {
         }
     };
 
+    console.log('requestData:', requestData);
+
     try {
         axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
+                console.log('response.data:', response.data);
                 return response.data;
             })
             .catch((error) => {
