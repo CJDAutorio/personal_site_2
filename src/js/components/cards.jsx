@@ -37,10 +37,8 @@ export const LastFmCard = (props) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
-    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, lastFmConfig;
+    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, netlifyConfig;
     let maxSongCount = 10;
-    const lastFmBaseUrl = process.env.LAST_FM_URL;
-    const lastFmUrl = new URL(lastFmBaseUrl);
     const now = Date.now();
     const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
 
@@ -52,7 +50,6 @@ export const LastFmCard = (props) => {
             case 1:
                 lastFmCardId = 'lastfm-card-recent-tracks';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getRecentTracks',
                     'format': 'json',
                     'user': 'struggle__'
@@ -62,7 +59,6 @@ export const LastFmCard = (props) => {
             case 2:
                 lastFmCardId = 'lastfm-card-top-tracks';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getWeeklyTrackChart',
                     'format': 'json',
                     'user': 'struggle__',
@@ -74,7 +70,6 @@ export const LastFmCard = (props) => {
             case 3:
                 lastFmCardId = 'lastfm-card-top-artists';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getWeeklyArtistChart',
                     'format': 'json',
                     'user': 'struggle__',
@@ -90,12 +85,9 @@ export const LastFmCard = (props) => {
         lastFmCardLoadingId = lastFmCardId + '-progress-bar';
         lastFmCardBgId = lastFmCardId + '-bg';
 
-        lastFmConfig = {
-            params: params,
-            headers: {
-                'user-agent': process.env.LAST_FM_USER_AGENT
-            }
-        };
+        netlifyConfig = {
+            params
+        }
     }
     initVariables();
 
@@ -132,7 +124,7 @@ export const LastFmCard = (props) => {
 
     // Gets recent track list from LastFM API
     function getRecentTracks() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -150,7 +142,7 @@ export const LastFmCard = (props) => {
 
     // Gets most listened to tracks from LastFM API
     function getTopTracks() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -171,7 +163,7 @@ export const LastFmCard = (props) => {
 
     // Gets top artists from LastFM API
     function getTopArtists() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+        axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -237,7 +229,6 @@ export const LastFmCard = (props) => {
 
     // Get LastFm album covers if not already populated
     async function getAlbumCovers() {
-
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
@@ -254,20 +245,13 @@ export const LastFmCard = (props) => {
 
         async function albumImageSearch(index) {
             params = {
-                'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'track.getInfo',
                 'format': 'json',
                 'track': lastFmData[index].name,
                 'artist': lastFmData[index].artist['#text']
             }
 
-            lastFmConfig = {
-                params: params,
-                headers: {
-                    'user-agent': process.env.LAST_FM_USER_AGENT
-                }
-            };
-            axios.get(lastFmUrl.toString(), lastFmConfig)
+            axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
                 .then((response) => {
                     if (response.data.track && Object.keys(response.data.track).length > 0) {
                         if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
@@ -319,7 +303,7 @@ export const LastFmCard = (props) => {
                 }
             };
 
-            axios.get(lastFmUrl.toString(), lastFmConfig)
+            axios.get('/.netlify/functions/lastfm-background', netlifyConfig)
                 .then((response) => {
                     if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                         const newImageList = imageList;
