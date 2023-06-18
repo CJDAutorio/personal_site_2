@@ -30,10 +30,10 @@ exports.handler = async function (event, context) {
         console.log('running axios get request');
         await axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
-                console.log('response.data:', response.data);
+                console.log('body:', JSON.stringify(response.data));
                 return {
                     statusCode: 200,
-                    body: JSON.stringify({weeklytrackchart: response.data.weeklytrackchart})
+                    body: JSON.stringify(response.data)
                 }
             })
             .catch((error) => {
