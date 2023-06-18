@@ -7,9 +7,6 @@ import Nav from '../../components/nav';
 
 function AboutMe() {
 
-  useEffect(() => {
-  });
-
   return (
     <>
 
