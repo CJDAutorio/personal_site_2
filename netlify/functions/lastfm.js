@@ -7,8 +7,14 @@ exports.handler = async function (event, context) {
     const lastFmBaseUrl = process.env.LAST_FM_URL;
     const lastFmUrl = new URL(lastFmBaseUrl);
     
-    let params = requestData.params;
-    params.api_key = process.env.LAST_FM_API_KEY;
+    // let params = requestData.params;
+    let params = {
+        'format': requestData.format,
+        'method': requestData.method,
+        'user': requestData.user,
+        'api_key': process.env.LAST_FM_API_KEY
+    }
+    // params.api_key = process.env.LAST_FM_API_KEY;
 
     let lastFmConfig = {
         params: params,
