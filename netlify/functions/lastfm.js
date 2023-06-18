@@ -26,15 +26,17 @@ exports.handler = async function (event, context) {
     };
     console.log('lastFmConfig:', lastFmConfig);
 
+    const pass = (body) => {callback( null, {
+        statusCode: 200,
+        body: JSON.stringify(body)
+      })}
+
     try {
         console.log('running axios get request');
         await axios.get(lastFmUrl.toString(), lastFmConfig)
             .then((response) => {
                 console.log('body:', JSON.stringify(response.data));
-                return {
-                    statusCode: 200,
-                    body: JSON.stringify(response.data)
-                }
+                pass(response.data);
             })
             .catch((error) => {
                 console.error('axios error:', error.message);
