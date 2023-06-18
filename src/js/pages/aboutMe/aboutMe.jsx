@@ -7,12 +7,8 @@ import Nav from '../../components/nav';
 
 function AboutMe() {
 
-  useEffect(() => {
-  });
-
   return (
     <>
-
       <div id='about-me' className='page'>
         <div className='page-header' id='aboutMe-header'>
           <h1 className='header'>ABOUT ME</h1>
@@ -31,7 +27,7 @@ function AboutMe() {
                   <br /><br />
                   If you’re in a rush you can quickly view or download my resume <a href={Resume} target='_blank' rel='noopener noreferrer' className='inline-button'>here</a>.
                 </p>
-                <img src={Portrait} alt='Me' id='portrait' />
+                {/* <img src={Portrait} alt='Me' id='portrait' /> */}
               </div>
             </div>
             <hr />

@@ -26,11 +26,11 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    fetch('/api/data')
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/data')
+  //     .then((response) => response.json())
+  //     .then((data) => setData(data));
+  // }, []);
 
   return (
     <>
