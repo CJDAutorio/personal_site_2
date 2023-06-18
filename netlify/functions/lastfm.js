@@ -1,7 +1,7 @@
 import axios, { isCancel, AxiosError } from 'axios';
 
 exports.handler = async function (event, context) {
-    const requestData = event.body;
+    const requestData = event.queryStringParameters;
     console.log('requestData:', requestData);
 
     const lastFmBaseUrl = process.env.LAST_FM_URL;

@@ -86,9 +86,10 @@ export const LastFmCard = (props) => {
         lastFmCardBgId = lastFmCardId + '-bg';
 
         netlifyConfig = {
-            params
+            params: params
         }
     }
+
     initVariables();
 
     // Get LastFm music list after delay
