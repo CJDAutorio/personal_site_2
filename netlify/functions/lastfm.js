@@ -21,7 +21,7 @@ exports.handler = async function (event, context) {
         headers: {
             'user-agent': process.env.LAST_FM_USER_AGENT,
             'Access-Control-Allow-Origin': '*', 
-            'Access-Control-Allow-Credentials': true 
+            'Access-Control-Allow-Credentials': 'true'
         }
     };
     console.log('lastFmConfig:', lastFmConfig);
