@@ -25,3 +25,4 @@ node_modules
 src/js/components/creds.json
 process.env
 vite.config.js
+vite.config.js
