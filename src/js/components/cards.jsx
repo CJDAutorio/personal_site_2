@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios, { isCancel, AxiosError } from 'axios';
 import axiosThrottle from 'axios-request-throttle';
-import { API } from 'aws-amplify';
+// import { API } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
