@@ -3,6 +3,7 @@ import axios, { isCancel, AxiosError } from 'axios';
 import axiosThrottle from 'axios-request-throttle';
 // import { API } from 'aws-amplify';
 import Amplify from 'aws-amplify';
+import config from './aws-exports';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -32,6 +33,7 @@ export const ProjectCard = (props) => {
 }
 
 export const LastFmCard = (props) => {
+    Amplify.configure(config);
     const [cardType, setCardType] = useState(2);
     const [lastFmData, setLastFmData] = useState({});
     const [lastFmSongText, setLastFmSongText] = useState({ title: 'Unknown', artist: 'Unknown', playCount: 0, lastListened: 0 });
