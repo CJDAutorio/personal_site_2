@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios, { isCancel, AxiosError } from 'axios';
 import axiosThrottle from 'axios-request-throttle';
+import { API } from 'aws-amplify';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -120,7 +121,7 @@ export const LastFmCard = (props) => {
     }, [cardType]);
 
     // Gets recent track list from LastFM API
-    function getRecentTracks() {
+    async function getRecentTracks() {
         // axios.get(lastFmUrl.toString(), lastFmConfig)
         //     .then((response) => {
         //         if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
@@ -136,7 +137,22 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        axios.get('/lastfm', lastFmConfig)
+        // axios.get('/lastfm', lastFmConfig)
+        //     .then((response) => {
+        //         if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
+        //             setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
+        //             // console.log('response.data.recenttracks:', response.data.recenttracks);
+        //             setLoadingProgress(100);
+        //             setIsSongInfoLoaded(true);
+        //         } else {
+        //             // console.log('error with response.data:', response.data);
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log('error:', error);
+        //     });
+
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -153,7 +169,7 @@ export const LastFmCard = (props) => {
     }
 
     // Gets most listened to tracks from LastFM API
-    function getTopTracks() {
+    async function getTopTracks() {
         // axios.get(lastFmUrl.toString(), lastFmConfig)
         //     .then((response) => {
         //         if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
@@ -172,7 +188,7 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        axios.get('/lastfm', lastFmConfig)
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -192,7 +208,7 @@ export const LastFmCard = (props) => {
     }
 
     // Gets top artists from LastFM API
-    function getTopArtists() {
+    async function getTopArtists() {
         // axios.get(lastFmUrl.toString(), lastFmConfig)
         //     .then((response) => {
         //         const artistData = response.data.weeklyartistchart.artist;
@@ -208,7 +224,7 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        axios.get('/lastfm', lastFmConfig)
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -291,7 +307,6 @@ export const LastFmCard = (props) => {
 
         async function albumImageSearch(index) {
             params = {
-                'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'track.getInfo',
                 'format': 'json',
                 'track': lastFmData[index].name,
@@ -321,7 +336,7 @@ export const LastFmCard = (props) => {
             //         console.log('error:', error);
             //     });
 
-            axios.get('/lastfm', lastFmConfig)
+            await API.get('lastfm', '/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.track && Object.keys(response.data.track).length > 0) {
                         if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
@@ -388,7 +403,7 @@ export const LastFmCard = (props) => {
             //         console.log('error:', error);
             //     });
 
-            axios.get('/lastfm', lastFmConfig)
+            await API.get('lastfm', '/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                         const newImageList = imageList;
