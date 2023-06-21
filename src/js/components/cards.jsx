@@ -39,8 +39,6 @@ export const LastFmCard = (props) => {
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
     let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, lastFmConfig;
     let maxSongCount = 10;
-    const lastFmBaseUrl = process.env.LAST_FM_URL;
-    const lastFmUrl = new URL(lastFmBaseUrl);
     const now = Date.now();
     const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
 
