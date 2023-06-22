@@ -11,8 +11,7 @@
     "start:server": "node ./src/server/server.js"
   },
   "dependencies": {
-    "animejs": "^3.2.1",
-    "aws-amplify": "^5.3.1",
+    "aws-amplify": "^5.2.7",
     "axios": "^1.4.0",
     "axios-request-throttle": "^1.0.0",
     "cors": "^2.8.5",
