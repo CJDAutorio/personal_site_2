@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios, { isCancel, AxiosError } from 'axios';
 import axiosThrottle from 'axios-request-throttle';
 // import { API } from 'aws-amplify';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify'
 import config from '../../aws-exports';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
@@ -155,7 +155,7 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        await Amplify.API.get('lastfm', '/lastfm', lastFmConfig)
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -191,7 +191,7 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        await Amplify.API.get('lastfm', '/lastfm', lastFmConfig)
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -227,7 +227,7 @@ export const LastFmCard = (props) => {
         //         console.log('error:', error);
         //     });
 
-        await Amplify.API.get('lastfm', '/lastfm', lastFmConfig)
+        await API.get('lastfm', '/lastfm', lastFmConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -339,7 +339,7 @@ export const LastFmCard = (props) => {
             //         console.log('error:', error);
             //     });
 
-            await Amplify.API.get('lastfm', '/lastfm', lastFmConfig)
+            await API.get('lastfm', '/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.track && Object.keys(response.data.track).length > 0) {
                         if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
@@ -406,7 +406,7 @@ export const LastFmCard = (props) => {
             //         console.log('error:', error);
             //     });
 
-            await Amplify.API.get('lastfm', '/lastfm', lastFmConfig)
+            await API.get('lastfm', '/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                         const newImageList = imageList;
