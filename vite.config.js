@@ -12,8 +12,9 @@ export default defineConfig({
   define: {
   },
   resolve: {
-    alias: {
-      './runtimeConfig': './runtimeConfig.browser',
-    },
+    alias: [
+      { find: './runtimeConfig', replacement: './runtimeConfig.browser' },
+      { find: '@', replacement: '/src' },
+    ],
   }
 })
