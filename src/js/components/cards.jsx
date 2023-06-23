@@ -43,8 +43,6 @@ export const LastFmCard = (props) => {
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
     let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, lastFmConfig;
     let maxSongCount = 10;
-    const now = Date.now();
-    const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
 
     // Sets variables based on card type
     function initVariables() {
