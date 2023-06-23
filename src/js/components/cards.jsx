@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios, { isCancel, AxiosError } from 'axios';
-import axiosThrottle from 'axios-request-throttle';
 // import { API } from 'aws-amplify';
 // import { Amplify, API } from 'aws-amplify';
 // import awsExports from '../../aws-exports';
