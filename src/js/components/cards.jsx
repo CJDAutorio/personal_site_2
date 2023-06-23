@@ -33,7 +33,7 @@ export const ProjectCard = (props) => {
 }
 
 export const LastFmCard = (props) => {
-    Amplify.configure(awsExports);
+    // Amplify.configure(awsExports);
     const [cardType, setCardType] = useState(2);
     const [lastFmData, setLastFmData] = useState({});
     const [lastFmSongText, setLastFmSongText] = useState({ title: 'Unknown', artist: 'Unknown', playCount: 0, lastListened: 0 });
