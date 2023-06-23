@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-// import axios, { isCancel, AxiosError } from 'axios';
-// import axiosThrottle from 'axios-request-throttle';
+import axios, { isCancel, AxiosError } from 'axios';
+import axiosThrottle from 'axios-request-throttle';
 // import { API } from 'aws-amplify';
-import { Amplify, API } from 'aws-amplify';
-import awsExports from '../../aws-exports';
+// import { Amplify, API } from 'aws-amplify';
+// import awsExports from '../../aws-exports';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -124,7 +124,7 @@ export const LastFmCard = (props) => {
     // Gets recent track list from LastFM API
     async function getRecentTracks() {
 
-        await API.get('lastfm', '/lastfm', lastFmConfig)
+        await axios.get('/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -142,7 +142,7 @@ export const LastFmCard = (props) => {
 
     // Gets most listened to tracks from LastFM API
     async function getTopTracks() {
-        await API.get('lastfm', '/lastfm', lastFmConfig)
+        await axios.get('/lastfm', lastFmConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -163,7 +163,7 @@ export const LastFmCard = (props) => {
 
     // Gets top artists from LastFM API
     async function getTopArtists() {
-        await API.get('lastfm', '/lastfm', lastFmConfig)
+        await axios.get('/lastfm', lastFmConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -251,7 +251,7 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].artist['#text']
             }
 
-            await API.get('lastfm', '/lastfm', lastFmConfig)
+            await axios.get('/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.track && Object.keys(response.data.track).length > 0) {
                         if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
@@ -294,7 +294,7 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].name
             };
 
-            await API.get('lastfm', '/lastfm', lastFmConfig)
+            await axios.get('/lastfm', lastFmConfig)
                 .then((response) => {
                     if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                         const newImageList = imageList;
