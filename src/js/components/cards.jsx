@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 // import axios, { isCancel, AxiosError } from 'axios';
 // import { API } from 'aws-amplify';
 import { Amplify, API } from 'aws-amplify';
-// import awsExports from '../../aws-exports';
+import awsExports from '../../aws-exports';
 import { BsCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import Placeholder from '../../assets/img/songimageplaceholder.jpg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
