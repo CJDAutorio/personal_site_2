@@ -16,12 +16,12 @@ function HobbiesInterests() {
       </div>
       <div className='page-content'>
         <div className='flex-content-col'>
-          <div className='subsection'>
+          {/* <div className='subsection'>
             <h2 className='subheader'>Music</h2>
             <LastFmCard
               lastFmCardType={2}
             />
-          </div>
+          </div> */}
           <div className='subsection'>
             <h2 className='subheader'>Sports and Activities</h2>
             <div id='hobby-cards'>
