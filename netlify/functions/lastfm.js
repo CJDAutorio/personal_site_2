@@ -12,10 +12,15 @@ exports.handler = async function (event, context, callback) {
     //     'method': requestData.method,
     //     'api_key': process.env.LAST_FM_API_KEY
     // };
-    params.api_key = process.env.LAST_FM_API_KEY;
+
+    if (process.env.LAST_FM_API_KEY) {
+        params.api_key = process.env.LAST_FM_API_KEY;
+    }
+
     if (requestData.user) {
         params.user = requestData.user;
     }
+    
     console.log('params:', params);
 
     let lastFmConfig = {
