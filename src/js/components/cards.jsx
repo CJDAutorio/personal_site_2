@@ -246,6 +246,10 @@ export const LastFmCard = (props) => {
                 'artist': lastFmData[index].artist['#text']
             }
 
+            netlifyConfig = {
+                params: params
+            };
+
             search();
 
             async function search() {
@@ -292,10 +296,13 @@ export const LastFmCard = (props) => {
 
         async function topAlbumSearch(index) {
             params = {
-                'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'artist.getTopAlbums',
                 'format': 'json',
                 'artist': lastFmData[index].name
+            };
+
+            netlifyConfig = {
+                params: params
             };
 
             search();
