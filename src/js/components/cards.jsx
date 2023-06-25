@@ -252,12 +252,13 @@ export const LastFmCard = (props) => {
                 console.log('running getAlbumCovers search function');
                 await axios.get('/.netlify/functions/lastfm', netlifyConfig)
                     .then((response) => {
+                        console.log('getTopAlbums search response.data:', response.data);
                         if (response.data.track && Object.keys(response.data.track).length > 0) {
                             if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
                                 const newImageList = imageList;
                                 newImageList[index] = response.data.track.album.image[3]['#text'];
                                 setImageList(newImageList);
-                                // console.log('album image found:', response.data.track.album.image[3]['#text']);
+                                console.log('album image found:', response.data.track.album.image[3]['#text']);
                             } else {
                                 console.log('album image not found for track:', response.data.track.name);
                             }
@@ -303,6 +304,7 @@ export const LastFmCard = (props) => {
                 console.log('running getTopAlbums search function');
                 await axios.get('/.netlify/functions/lastfm', netlifyConfig)
                     .then((response) => {
+                        console.log('getTopAlbums search response.data:', response.data);
                         if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
                             const newImageList = imageList;
                             newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
