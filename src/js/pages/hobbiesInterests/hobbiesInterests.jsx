@@ -18,6 +18,7 @@ function HobbiesInterests() {
         <div className='flex-content-col'>
           <div className='subsection'>
             <h2 className='subheader'>Music</h2>
+            <p>Information sourced from LastFM</p>
             <LastFmCard
               lastFmCardType={2}
             />
