@@ -359,9 +359,9 @@ export const LastFmCard = (props) => {
                 });
             } else {
                 setLastFmSongText({
-                    title: lastFmData[currentIndex].name,
-                    artist: lastFmData[currentIndex].artist['#text'] || 'Unknown',
-                    playCount: lastFmData[currentIndex].playcount,
+                    title: lastFmData[currentIndex]?.name || 'Unknown',
+                    artist: lastFmData[currentIndex]?.artist?.['#text'] || 'Unknown',
+                    playCount: lastFmData[currentIndex]?.playcount || 'Unknown',
                     lastListened: lastListened
                 });
             }
