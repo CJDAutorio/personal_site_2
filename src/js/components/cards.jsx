@@ -39,8 +39,6 @@ export const LastFmCard = (props) => {
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
     let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, netlifyConfig;
     let maxSongCount = 10;
-    const now = Date.now();
-    const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
 
     axiosThrottle.use(axios, { requestsPerSecond: 2 });
 
@@ -62,8 +60,6 @@ export const LastFmCard = (props) => {
                     'method': 'user.getWeeklyTrackChart',
                     'format': 'json',
                     'user': 'struggle__',
-                    // 'from': weekAgo,
-                    // 'to': now
                 }
                 title = 'Top ' + maxSongCount + ' Tracks This Week';
                 break;
@@ -73,8 +69,6 @@ export const LastFmCard = (props) => {
                     'method': 'user.getWeeklyArtistChart',
                     'format': 'json',
                     'user': 'struggle__',
-                    // 'from': weekAgo,
-                    // 'to': now
                 }
                 title = 'Top ' + maxSongCount + ' Artists This Week';
                 break;
