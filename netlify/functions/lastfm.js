@@ -5,15 +5,17 @@ exports.handler = async function (event, context, callback) {
     console.log('requestData:', requestData);
 
     const lastFmBaseUrl = process.env.LAST_FM_URL;
-    const lastFmUrl = new URL(lastFmBaseUrl);
     
-    // let params = requestData.params;
-    let params = {
-        'format': requestData.format,
-        'method': requestData.method,
-        'user': requestData.user,
-        'api_key': process.env.LAST_FM_API_KEY
-    };
+    let params = requestData.params;
+    // let params = {
+    //     'format': requestData.format,
+    //     'method': requestData.method,
+    //     'api_key': process.env.LAST_FM_API_KEY
+    // };
+    params.api_key = process.env.LAST_FM_API_KEY;
+    if (requestData.user) {
+        params.user = requestData.user;
+    }
     console.log('params:', params);
 
     let lastFmConfig = {
@@ -28,7 +30,7 @@ exports.handler = async function (event, context, callback) {
 
     try {
         console.log('running axios get request');
-        await axios.get(lastFmUrl.toString(), lastFmConfig)
+        await axios.get(lastFmBaseUrl, lastFmConfig)
             .then((response) => {
                 console.log('body:', JSON.stringify(response.data));
                 callback(null, {
