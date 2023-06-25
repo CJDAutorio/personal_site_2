@@ -6,7 +6,8 @@ exports.handler = async function (event, context, callback) {
 
     const lastFmBaseUrl = process.env.LAST_FM_URL;
     
-    let params = requestData.params;
+    let params = requestData.params || {};
+    // let params = requestData.params;
     // let params = {
     //     'format': requestData.format,
     //     'method': requestData.method,
@@ -20,7 +21,7 @@ exports.handler = async function (event, context, callback) {
     if (requestData.user) {
         params.user = requestData.user;
     }
-    
+
     console.log('params:', params);
 
     let lastFmConfig = {
