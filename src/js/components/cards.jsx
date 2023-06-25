@@ -249,6 +249,7 @@ export const LastFmCard = (props) => {
             search();
 
             async function search() {
+                console.log('running getAlbumCovers search function');
                 await axios.get('/.netlify/functions/lastfm', netlifyConfig)
                     .then((response) => {
                         if (response.data.track && Object.keys(response.data.track).length > 0) {
@@ -299,6 +300,7 @@ export const LastFmCard = (props) => {
             search();
 
             async function search() {
+                console.log('running getTopAlbums search function');
                 await axios.get('/.netlify/functions/lastfm', netlifyConfig)
                     .then((response) => {
                         if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
