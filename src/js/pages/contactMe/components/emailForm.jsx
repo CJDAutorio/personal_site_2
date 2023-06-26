@@ -81,7 +81,7 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true" netlify>
+        <form id='contact-grid' method='POST' data-netlify="true" netlify>
             <label htmlFor='email-name'>Your Name</label>
             <input
                 type='text'
@@ -112,9 +112,9 @@ const EmailForm = () => {
                 className='email-textinput'
                 id='email-subject'
                 name='emailSubject'
-                placeholder='Subject (min 5 characters)'
+                placeholder='Subject (min 4 characters)'
                 required
-                minLength={5}
+                minLength={4}
                 onChange={handleChange}
             />
             {formErrors.isSubjectEmpty && <div className='contact-error'><p>Please enter a subject</p></div>}
@@ -128,6 +128,7 @@ const EmailForm = () => {
             >
             </textarea>
             {formErrors.isMessageEmpty && <div className='contact-error'><p>Please enter a message</p></div>}
+            <div data-netlify-recaptcha='true'></div>
             <button type='submit' id='email-submit' ><BsFillEnvelopeHeartFill />Send Email<BsFillEnvelopeHeartFill /></button>
         </form>
     );
