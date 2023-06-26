@@ -31,7 +31,7 @@ export const ProjectCard = (props) => {
 }
 
 export const LastFmCard = (props) => {
-    if (!isMobile) {
+    if (isMobile) {
         const [cardType, setCardType] = useState(2);
         const [lastFmData, setLastFmData] = useState({});
         const [lastFmSongText, setLastFmSongText] = useState({ title: 'Unknown', artist: 'Unknown', playCount: 0, lastListened: 0 });
