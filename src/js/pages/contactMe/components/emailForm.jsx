@@ -52,25 +52,25 @@ const EmailForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (validateInputs && validateEmail) {
-            axios.post(
-                '/',
-                emailData,
-                {
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    }
-                }
-            )
-                .then(response => {
-                    console.log('Email sent successfully');
-                    // Handle success if needed
-                })
-                .catch(error => {
-                    console.error('Failed to send email:', error);
-                    // Handle error if needed
-                });
-        }
+        // if (validateInputs && validateEmail) {
+        //     axios.post(
+        //         '/',
+        //         emailData,
+        //         {
+        //             headers: {
+        //                 "Content-Type": "application/x-www-form-urlencoded"
+        //             }
+        //         }
+        //     )
+        //         .then(response => {
+        //             console.log('Email sent successfully');
+        //             // Handle success if needed
+        //         })
+        //         .catch(error => {
+        //             console.error('Failed to send email:', error);
+        //             // Handle error if needed
+        //         });
+        // }
     }
 
     const handleChange = (event) => {
@@ -81,7 +81,7 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' data-netlify="true" netlify>
+        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true" netlify>
             <label htmlFor='email-name'>Your Name</label>
             <input
                 type='text'
