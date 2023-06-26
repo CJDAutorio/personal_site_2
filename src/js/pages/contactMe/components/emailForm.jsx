@@ -81,8 +81,8 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true">
-            <label htmlFor='emailName'>Your Name</label>
+        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true" netlify>
+            <label htmlFor='email-name'>Your Name</label>
             <input
                 type='text'
                 className='email-textinput'
@@ -93,7 +93,7 @@ const EmailForm = () => {
                 onChange={handleChange}
             />
             {formErrors.isNameEmpty && <div className='contact-error'><p>Please enter a name</p></div>}
-            <label htmlFor='emailEmail'>Your Email</label>
+            <label htmlFor='email-email'>Your Email</label>
             <input
                 type='email'
                 className='email-textinput'
@@ -106,7 +106,7 @@ const EmailForm = () => {
             />
             {formErrors.isEmailEmpty && <div className='contact-error'><p>Please enter an email</p></div>}
             {formErrors.isEmailInvalid && <div className='contact-error'><p>Please enter a valid email</p></div>}
-            <label htmlFor='emailSubject'>Your Subject</label>
+            <label htmlFor='email-subject'>Your Subject</label>
             <input
                 type='text'
                 className='email-textinput'
@@ -118,7 +118,7 @@ const EmailForm = () => {
                 onChange={handleChange}
             />
             {formErrors.isSubjectEmpty && <div className='contact-error'><p>Please enter a subject</p></div>}
-            <label htmlFor='emailMessage'>Your Message</label>
+            <label htmlFor='email-message'>Your Message</label>
             <textarea
                 id='email-message'
                 name='emailMessage'
