@@ -55,6 +55,7 @@
     width: 70rem;
     transition: all 2s cubic-bezier(0.26, 0, 0.18, 1);
     backdrop-filter: blur(0.25rem);
+    -webkit-backdrop-filter: blur(0.25rem);
     box-shadow: 0 0 1rem #000;
 }
 
