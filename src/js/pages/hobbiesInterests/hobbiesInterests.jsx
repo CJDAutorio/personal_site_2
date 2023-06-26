@@ -20,7 +20,7 @@ function HobbiesInterests() {
             <h2 className='subheader'>Music</h2>
             <p>Information sourced from LastFM</p>
             <LastFmCard
-              lastFmCardType={2}
+              lastFmCardType={1}
             />
           </div>
           <div className='subsection'>
