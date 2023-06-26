@@ -481,6 +481,7 @@ export const Card = (props) => {
                     height='auto'
                     controls={false}
                     style={{ objectFit: 'cover', transform: 'translate(0%, 0%)' }}
+                    playsinline={true}
                 />
                 <div className='card-video-overlay'></div>
             </div>
