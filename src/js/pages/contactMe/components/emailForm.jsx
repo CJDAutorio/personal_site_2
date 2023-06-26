@@ -53,23 +53,23 @@ const EmailForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateInputs && validateEmail) {
-            // axios.post(
-            //     '/',
-            //     emailData,
-            //     {
-            //         headers: {
-            //             "Content-Type": "application/x-www-form-urlencoded"
-            //         }
-            //     }
-            // )
-            //     .then(response => {
-            //         console.log('Email sent successfully:', response);
-            //         // Handle success if needed
-            //     })
-            //     .catch(error => {
-            //         console.error('Failed to send email:', error);
-            //         // Handle error if needed
-            //     });
+            axios.post(
+                '/',
+                emailData,
+                {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }
+                }
+            )
+                .then(response => {
+                    console.log('Email sent successfully');
+                    // Handle success if needed
+                })
+                .catch(error => {
+                    console.error('Failed to send email:', error);
+                    // Handle error if needed
+                });
         }
     }
 
