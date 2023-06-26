@@ -36,13 +36,13 @@ function ContactMe() {
             </div>
             <div className='subsection' id='contact-email'>
               <h3>Or send me an email directly!</h3>
-              {/* <EmailForm /> */}
-              <a href='mailto: cjdautorioalt@gmail.com' id='contact-email-link' onMouseOver={() => {emailLinkUnderline(1)}} onMouseOut={() => {emailLinkUnderline(0)}}>
+              <EmailForm />
+              {/* <a href='mailto: cjdautorioalt@gmail.com' id='contact-email-link' onMouseOver={() => {emailLinkUnderline(1)}} onMouseOut={() => {emailLinkUnderline(0)}}>
                 cjdautorioalt@gmail.com
                 <div id='contact-email-underline'>
                   <div id='contact-email-underline-color'></div>
                 </div>
-              </a>
+              </a> */}
             </div>
           </div>
         </Fade>
