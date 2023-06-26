@@ -53,7 +53,15 @@ const EmailForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateInputs && validateEmail) {
-            // axios.post('http://localhost:5000/sendEmail', emailData)
+            // axios.post(
+            //     '/',
+            //     emailData,
+            //     {
+            //         headers: {
+            //             "Content-Type": "application/x-www-form-urlencoded"
+            //         }
+            //     }
+            // )
             //     .then(response => {
             //         console.log('Email sent successfully:', response);
             //         // Handle success if needed
@@ -73,7 +81,7 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' onSubmit={handleSubmit}>
+        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true">
             <label htmlFor='emailName'>Your Name</label>
             <input
                 type='text'
