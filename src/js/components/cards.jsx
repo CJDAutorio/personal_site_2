@@ -38,7 +38,7 @@ export const LastFmCard = (props) => {
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
     let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, netlifyConfig;
-    let maxSongCount = 10;
+    let maxSongCount = 5;
 
     axiosThrottle.use(axios, { requestsPerSecond: 2 });
 
