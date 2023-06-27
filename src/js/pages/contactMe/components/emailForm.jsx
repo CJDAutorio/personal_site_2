@@ -52,25 +52,23 @@ const EmailForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // if (validateInputs && validateEmail) {
-        //     axios.post(
-        //         '/',
-        //         emailData,
-        //         {
-        //             headers: {
-        //                 "Content-Type": "application/x-www-form-urlencoded"
-        //             }
-        //         }
-        //     )
-        //         .then(response => {
-        //             console.log('Email sent successfully');
-        //             // Handle success if needed
-        //         })
-        //         .catch(error => {
-        //             console.error('Failed to send email:', error);
-        //             // Handle error if needed
-        //         });
-        // }
+        axios.post(
+            '/',
+            {body: emailData},
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }
+        )
+            .then(response => {
+                console.log('Email sent successfully');
+                // Handle success if needed
+            })
+            .catch(error => {
+                console.error('Failed to send email:', error);
+                // Handle error if needed
+            });
     }
 
     const handleChange = (event) => {
@@ -88,7 +86,7 @@ const EmailForm = () => {
                 className='email-textinput'
                 id='email-name' name='emailName'
                 placeholder='Name (min 2 characters)'
-                required
+                required={true}
                 minLength={2}
                 onChange={handleChange}
             />
@@ -125,6 +123,7 @@ const EmailForm = () => {
                 placeholder='Message (min 10 characters)'
                 required
                 minLength={10}
+                onChange={handleChange}
             >
             </textarea>
             {formErrors.isMessageEmpty && <div className='contact-error'><p>Please enter a message</p></div>}
