@@ -79,7 +79,7 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify="true" netlify>
+        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify={true} netlify>
             <label htmlFor='email-name'>Your Name</label>
             <input
                 type='text'
