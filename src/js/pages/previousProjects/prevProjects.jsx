@@ -24,7 +24,7 @@ function PrevProjs() {
                   projectGitLink='https://github.com/g445g445/PawTracks'
                   projectPageLink='https://stage.pawtracks.live/'
                   projectDesc={
-                    <p>An online petsitter powered by TensorFlow which allows users to monitor their pet through a webcam or a mobile device.</p>
+                    <p>An online petsitter hosted on Amplify and powered by TensorFlow which allows users to monitor their pet through a webcam or a mobile device.</p>
                   }
                 />
               </div>
