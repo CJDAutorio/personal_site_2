@@ -30,19 +30,15 @@ export const ProjectCard = (props) => {
 }
 
 export const LastFmCard = (props) => {
-    const [cardType, setCardType] = useState(2);
+    const [cardType, setCardType] = useState(props.lastFmCardType);
     const [lastFmData, setLastFmData] = useState({});
     const [lastFmSongText, setLastFmSongText] = useState({ title: 'Unknown', artist: 'Unknown', playCount: 0, lastListened: 0 });
     const [isSongInfoLoaded, setIsSongInfoLoaded] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [imageList, setImageList] = useState([Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder]);
-    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, lastFmConfig;
-    let maxSongCount = 10;
-    const lastFmBaseUrl = process.env.LAST_FM_URL;
-    const lastFmUrl = new URL(lastFmBaseUrl);
-    const now = Date.now();
-    const weekAgo = (Date.now() - (1000 * 60 * 60 * 24 * 7));
+    let lastFmCardId, lastFmCardLoadingId, lastFmCardBgId, params, title, netlifyConfig;
+    let maxSongCount = 5;
 
     axiosThrottle.use(axios, { requestsPerSecond: 2 });
 
@@ -52,7 +48,6 @@ export const LastFmCard = (props) => {
             case 1:
                 lastFmCardId = 'lastfm-card-recent-tracks';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getRecentTracks',
                     'format': 'json',
                     'user': 'struggle__'
@@ -62,24 +57,18 @@ export const LastFmCard = (props) => {
             case 2:
                 lastFmCardId = 'lastfm-card-top-tracks';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getWeeklyTrackChart',
                     'format': 'json',
                     'user': 'struggle__',
-                    // 'from': weekAgo,
-                    // 'to': now
                 }
                 title = 'Top ' + maxSongCount + ' Tracks This Week';
                 break;
             case 3:
                 lastFmCardId = 'lastfm-card-top-artists';
                 params = {
-                    'api_key': process.env.LAST_FM_API_KEY,
                     'method': 'user.getWeeklyArtistChart',
                     'format': 'json',
                     'user': 'struggle__',
-                    // 'from': weekAgo,
-                    // 'to': now
                 }
                 title = 'Top ' + maxSongCount + ' Artists This Week';
                 break;
@@ -90,13 +79,11 @@ export const LastFmCard = (props) => {
         lastFmCardLoadingId = lastFmCardId + '-progress-bar';
         lastFmCardBgId = lastFmCardId + '-bg';
 
-        lastFmConfig = {
-            params: params,
-            headers: {
-                'user-agent': process.env.LAST_FM_USER_AGENT
-            }
-        };
+        netlifyConfig = {
+            params: params
+        }
     }
+
     initVariables();
 
     // Get LastFm music list after delay
@@ -131,8 +118,8 @@ export const LastFmCard = (props) => {
     }, [cardType]);
 
     // Gets recent track list from LastFM API
-    function getRecentTracks() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+    async function getRecentTracks() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.recenttracks.track && response.data.recenttracks.track.length > 0) {
                     setLastFmData(response.data.recenttracks.track.slice(0, maxSongCount));
@@ -149,8 +136,8 @@ export const LastFmCard = (props) => {
     }
 
     // Gets most listened to tracks from LastFM API
-    function getTopTracks() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+    async function getTopTracks() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 if (response.data.weeklytrackchart.track && response.data.weeklytrackchart.track.length > 0) {
                     if (response.data.weeklytrackchart.track.length > maxSongCount) {
@@ -170,8 +157,8 @@ export const LastFmCard = (props) => {
     }
 
     // Gets top artists from LastFM API
-    function getTopArtists() {
-        axios.get(lastFmUrl.toString(), lastFmConfig)
+    async function getTopArtists() {
+        await axios.get('/.netlify/functions/lastfm', netlifyConfig)
             .then((response) => {
                 const artistData = response.data.weeklyartistchart.artist;
                 if (artistData && artistData.length > 0) {
@@ -237,7 +224,6 @@ export const LastFmCard = (props) => {
 
     // Get LastFm album covers if not already populated
     async function getAlbumCovers() {
-
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
@@ -254,35 +240,39 @@ export const LastFmCard = (props) => {
 
         async function albumImageSearch(index) {
             params = {
-                'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'track.getInfo',
                 'format': 'json',
                 'track': lastFmData[index].name,
                 'artist': lastFmData[index].artist['#text']
             }
 
-            lastFmConfig = {
-                params: params,
-                headers: {
-                    'user-agent': process.env.LAST_FM_USER_AGENT
-                }
+            netlifyConfig = {
+                params: params
             };
-            axios.get(lastFmUrl.toString(), lastFmConfig)
-                .then((response) => {
-                    if (response.data.track && Object.keys(response.data.track).length > 0) {
-                        if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
-                            const newImageList = imageList;
-                            newImageList[index] = response.data.track.album.image[3]['#text'];
-                            setImageList(newImageList);
-                            // console.log('album image found:', response.data.track.album.image[3]['#text']);
-                        } else {
-                            console.log('album image not found for track:', response.data.track.name);
+
+            search();
+
+            async function search() {
+                // console.log('running getAlbumCovers search function');
+                await axios.get('/.netlify/functions/lastfm', netlifyConfig)
+                    .then((response) => {
+                        // console.log('getTopAlbums search response.data:', response.data);
+                        if (response.data.track && Object.keys(response.data.track).length > 0) {
+                            if (response.data.track.album && Object.keys(response.data.track.album).length > 0 && response.data.track.album.image[3]['#text']) {
+                                const newImageList = imageList;
+                                newImageList[index] = response.data.track.album.image[3]['#text'];
+                                setImageList(newImageList);
+                                // console.log('album image found:', response.data.track.album.image[3]['#text']);
+                            } else {
+                                console.log('album image not found for track:', response.data.track.name);
+                            }
                         }
-                    }
-                })
-                .catch((error) => {
-                    console.log('error:', error);
-                });
+                    })
+                    .catch((error) => {
+                        console.log('error:', error);
+                    });
+            }
+
             await delay(500);
         }
     }
@@ -306,33 +296,35 @@ export const LastFmCard = (props) => {
 
         async function topAlbumSearch(index) {
             params = {
-                'api_key': process.env.LAST_FM_API_KEY,
                 'method': 'artist.getTopAlbums',
                 'format': 'json',
                 'artist': lastFmData[index].name
             };
 
-            lastFmConfig = {
-                params: params,
-                headers: {
-                    'user-agent': process.env.LAST_FM_USER_AGENT
-                }
+            netlifyConfig = {
+                params: params
             };
 
-            axios.get(lastFmUrl.toString(), lastFmConfig)
-                .then((response) => {
-                    if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
-                        const newImageList = imageList;
-                        newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
-                        setImageList(newImageList);
-                        console.log('artist image found:', response.data.topalbums.album[0].image[3]['#text']);
-                    } else {
-                        console.log('artist image not found for artist:', lastFmData[index].name);
-                    }
-                })
-                .catch((error) => {
-                    console.log('error:', error);
-                });
+            search();
+
+            async function search() {
+                // console.log('running getTopAlbums search function');
+                await axios.get('/.netlify/functions/lastfm', netlifyConfig)
+                    .then((response) => {
+                        // console.log('getTopAlbums search response.data:', response.data);
+                        if (response.data.topalbums?.album?.[0].image?.[3]['#text']) {
+                            const newImageList = imageList;
+                            newImageList[index] = response.data.topalbums.album[0].image[3]['#text'];
+                            setImageList(newImageList);
+                            // console.log('artist image found:', response.data.topalbums.album[0].image[3]['#text']);
+                        } else {
+                            console.log('artist image not found for artist:', lastFmData[index].name);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('error:', error);
+                    });
+            }
             await delay(500);
         }
     }
@@ -367,9 +359,9 @@ export const LastFmCard = (props) => {
                 });
             } else {
                 setLastFmSongText({
-                    title: lastFmData[currentIndex].name,
-                    artist: lastFmData[currentIndex].artist['#text'] || 'Unknown',
-                    playCount: lastFmData[currentIndex].playcount,
+                    title: lastFmData[currentIndex]?.name || 'Unknown',
+                    artist: lastFmData[currentIndex]?.artist?.['#text'] || 'Unknown',
+                    playCount: lastFmData[currentIndex]?.playcount || 'Unknown',
                     lastListened: lastListened
                 });
             }
@@ -406,7 +398,7 @@ export const LastFmCard = (props) => {
         if (document.getElementById(lastFmCardLoadingId)) {
             document.getElementById(lastFmCardLoadingId).style.width = loadingProgress + '%';
         }
-        console.log('loading progress:', loadingProgress);
+        console.log('Song loading progress:', loadingProgress);
     }, [loadingProgress]);
 
     return (
@@ -489,6 +481,7 @@ export const Card = (props) => {
                     height='auto'
                     controls={false}
                     style={{ objectFit: 'cover', transform: 'translate(0%, 0%)' }}
+                    playsinline={true}
                 />
                 <div className='card-video-overlay'></div>
             </div>

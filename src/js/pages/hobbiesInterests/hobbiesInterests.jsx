@@ -18,8 +18,9 @@ function HobbiesInterests() {
         <div className='flex-content-col'>
           <div className='subsection'>
             <h2 className='subheader'>Music</h2>
+            <p>Information sourced from LastFM</p>
             <LastFmCard
-              lastFmCardType={2}
+              lastFmCardType={1}
             />
           </div>
           <div className='subsection'>
@@ -28,12 +29,14 @@ function HobbiesInterests() {
               <Card
                 cardId='intramurals'
                 cardGraphic={FlagFootball}
+                // cardGraphic='assets/flagfootball.webm'
                 cardName='Intramurals'
                 cardDesc={<div><p>Casual league 4v4 and 7v7 flag football demon.</p><br /><p>Shoutout Tom, Codie, Ben M, Ben P, Eric, and Evan.</p></div>}
               />
               <Card
                 cardId='gym'
                 cardGraphic={Gym}
+                // cardGraphic='assets/gym.webm'
                 cardName='Lifting'
                 cardDesc={<div><p><b>Bench:</b>&emsp;235 lbs</p><br /><p><b>Squat:</b>&emsp;1 slipped disc</p><br /><p><b>Deadlift:</b>&emsp;Gym didn't let me</p></div>}
               />

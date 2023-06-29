@@ -52,17 +52,23 @@ const EmailForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (validateInputs && validateEmail) {
-            // axios.post('http://localhost:5000/sendEmail', emailData)
-            //     .then(response => {
-            //         console.log('Email sent successfully:', response);
-            //         // Handle success if needed
-            //     })
-            //     .catch(error => {
-            //         console.error('Failed to send email:', error);
-            //         // Handle error if needed
-            //     });
-        }
+        axios.post(
+            '/',
+            {body: emailData},
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }
+        )
+            .then(response => {
+                console.log('Email sent successfully');
+                // Handle success if needed
+            })
+            .catch(error => {
+                console.error('Failed to send email:', error);
+                // Handle error if needed
+            });
     }
 
     const handleChange = (event) => {
@@ -73,19 +79,19 @@ const EmailForm = () => {
     }
 
     return (
-        <form id='contact-grid' method='POST' onSubmit={handleSubmit}>
-            <label htmlFor='emailName'>Your Name</label>
+        <form id='contact-grid' method='POST' onSubmit={handleSubmit} data-netlify={true} netlify>
+            <label htmlFor='email-name'>Your Name</label>
             <input
                 type='text'
                 className='email-textinput'
                 id='email-name' name='emailName'
                 placeholder='Name (min 2 characters)'
-                required
+                required={true}
                 minLength={2}
                 onChange={handleChange}
             />
             {formErrors.isNameEmpty && <div className='contact-error'><p>Please enter a name</p></div>}
-            <label htmlFor='emailEmail'>Your Email</label>
+            <label htmlFor='email-email'>Your Email</label>
             <input
                 type='email'
                 className='email-textinput'
@@ -98,28 +104,30 @@ const EmailForm = () => {
             />
             {formErrors.isEmailEmpty && <div className='contact-error'><p>Please enter an email</p></div>}
             {formErrors.isEmailInvalid && <div className='contact-error'><p>Please enter a valid email</p></div>}
-            <label htmlFor='emailSubject'>Your Subject</label>
+            <label htmlFor='email-subject'>Your Subject</label>
             <input
                 type='text'
                 className='email-textinput'
                 id='email-subject'
                 name='emailSubject'
-                placeholder='Subject (min 5 characters)'
+                placeholder='Subject (min 4 characters)'
                 required
-                minLength={5}
+                minLength={4}
                 onChange={handleChange}
             />
             {formErrors.isSubjectEmpty && <div className='contact-error'><p>Please enter a subject</p></div>}
-            <label htmlFor='emailMessage'>Your Message</label>
+            <label htmlFor='email-message'>Your Message</label>
             <textarea
                 id='email-message'
                 name='emailMessage'
                 placeholder='Message (min 10 characters)'
                 required
                 minLength={10}
+                onChange={handleChange}
             >
             </textarea>
             {formErrors.isMessageEmpty && <div className='contact-error'><p>Please enter a message</p></div>}
+            <div data-netlify-recaptcha='true'></div>
             <button type='submit' id='email-submit' ><BsFillEnvelopeHeartFill />Send Email<BsFillEnvelopeHeartFill /></button>
         </form>
     );

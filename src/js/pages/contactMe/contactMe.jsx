@@ -37,8 +37,8 @@ function ContactMe() {
             <div className='subsection' id='contact-email'>
               <h3>Or send me an email directly!</h3>
               {/* <EmailForm /> */}
-              <a href='mailto: cjdautorioalt@gmail.com' id='contact-email-link' onMouseOver={() => {emailLinkUnderline(1)}} onMouseOut={() => {emailLinkUnderline(0)}}>
-                cjdautorioalt@gmail.com
+              <a href='mailto: cjdautorioalt@gmail.com' id='contact-email-link' target='_blank' rel='noopener noreferrer' onMouseOver={() => {emailLinkUnderline(1)}} onMouseOut={() => {emailLinkUnderline(0)}}>
+                Contact me here!
                 <div id='contact-email-underline'>
                   <div id='contact-email-underline-color'></div>
                 </div>

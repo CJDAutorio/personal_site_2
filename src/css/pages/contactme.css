@@ -164,3 +164,14 @@
     border-radius: 0.15rem;
     outline-color: var(--white-color);
 }
+
+@media screen and (max-width: 650px) {
+    #contact-grid {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #email-submit {
+        width: 90%;
+    }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {Link, Route, Routes} from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Particles from './js/pages/landing/components/particles';
 import Landing from './js/pages/landing/landing';
 import AboutMe from './js/pages/aboutMe/aboutMe';
@@ -14,17 +14,17 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [apiResponse, setApiResponse] = useState(null);
 
-  useEffect(() => {
-    const handleLoad = () => {
-      setIsLoaded(true);
-    }
+  // useEffect(() => {
+  //   const handleLoad = () => {
+  //     setIsLoaded(true);
+  //   }
 
-    window.addEventListener('load', handleLoad);
+  //   window.addEventListener('load', handleLoad);
 
-    return () => {
-      window.removeEventListener('load', handleLoad);
-    }
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('load', handleLoad);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   fetch('/api/data')
@@ -34,36 +34,28 @@ function App() {
 
   return (
     <>
-    {isLoaded ? (
-      <>
-        <div id='pages'>
-          <Particles />
-          <Landing />
-          <Fade bottom duration={1500} delay={0} opposite>
-            <div id='aboutMeContainer'>
-              <AboutMe />
-            </div>
-            <div id='workEduContainer'>
-              <WorkEdu />
-            </div>
-            <div id='prevProjsContainer'>
-              <PrevProjs />
-            </div>
-            <div id='hobbiesInterestsContainer'>
-              <HobbiesInterests />
-            </div>
-            <div id='contactMeContainer'>
-              <ContactMe />
-            </div>
-          </Fade>
-        </div>
-        <div id='message-overlay'></div>
-      </>
-    ) : (
       <div id='pages'>
-        {/* <p>Loading page...</p> */}
+        <Particles />
+        <Landing />
+        <Fade bottom duration={1500} delay={0} opposite>
+          <div id='aboutMeContainer'>
+            <AboutMe />
+          </div>
+          <div id='workEduContainer'>
+            <WorkEdu />
+          </div>
+          <div id='prevProjsContainer'>
+            <PrevProjs />
+          </div>
+          <div id='hobbiesInterestsContainer'>
+            <HobbiesInterests />
+          </div>
+          <div id='contactMeContainer'>
+            <ContactMe />
+          </div>
+        </Fade>
       </div>
-    )}
+      <div id='message-overlay'></div>
     </>
   )
 }
