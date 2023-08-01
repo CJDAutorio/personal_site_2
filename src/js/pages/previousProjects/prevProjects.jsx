@@ -20,7 +20,7 @@ function PrevProjs() {
               <div className='flex-content-row'>
                 <ProjectCard
                   projectId='pawtracks'
-                  projectName='Senior Year Capstone - PawTracks'
+                  projectName='PawTracks'
                   projectImage={PawTracksScreen}
                   projectGitLink='https://github.com/g445g445/PawTracks'
                   projectPageLink='https://stage.pawtracks.live/'
