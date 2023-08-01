@@ -3,6 +3,7 @@ import Fade from 'react-reveal/Fade';
 import Nav from '../../components/nav';
 import { ProjectCard } from '../../components/cards';
 import PawTracksScreen from "../../../assets/img/pawtracks-screenshot.png";
+import NinerPickupScreen from "../../../assets/img/ninerpickup_screen.jpg";
 
 function PrevProjs() {
 
@@ -25,6 +26,16 @@ function PrevProjs() {
                   projectPageLink='https://stage.pawtracks.live/'
                   projectDesc={
                     <p>An online petsitter powered by TensorFlow which allows users to monitor their pet through a webcam or a mobile device.</p>
+                  }
+                />
+                <ProjectCard
+                  projectId='ninerpickup'
+                  projectName='Niner Pickup'
+                  projectImage={NinerPickupScreen}
+                  projectGitLink='https://github.com/CJDAutorio/NinerPickup'
+                  projectPageLink='https://github.com/CJDAutorio/NinerPickup'
+                  projectDesc={
+                    <p>A "Looking for Group" solution for activities on or near campus.</p>
                   }
                 />
               </div>
