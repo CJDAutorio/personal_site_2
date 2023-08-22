@@ -4,6 +4,7 @@ import Nav from '../../components/nav';
 import { ProjectCard } from '../../components/cards';
 import PawTracksScreen from "../../../assets/img/pawtracks-screenshot.png";
 import NinerPickupScreen from "../../../assets/img/ninerpickup-screen.jpg";
+import PIGScreen from "../../../assets/img/pig-screen.jpg";
 
 function PrevProjs() {
 
@@ -26,6 +27,16 @@ function PrevProjs() {
                   projectPageLink='https://stage.pawtracks.live/'
                   projectDesc={
                     <p>An online petsitter hosted on Amplify and powered by TensorFlow.</p>
+                  }
+                />
+                <ProjectCard
+                  projectId='projectideagenerator'
+                  projectName='Project Idea Generator'
+                  projectImage={PIGScreen}
+                  projectGitLink='https://github.com/CJDAutorio/Project-Idea-Generator'
+                  projectPageLink='https://www.projectideagenerator.com/'
+                  projectDesc={
+                    <p>A practice project generator powered by OpenAI's GPT-3.</p>
                   }
                 />
                 <ProjectCard
