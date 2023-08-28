@@ -18,12 +18,22 @@ html {
     padding: 0;
 }
 
+#background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -2;
+    overflow: hidden;
+    background-color: var(--black-color);
+}
+
 #pages {
     /* display: inline-block; */
     width: 100%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    z-index: 1;
 }
 
 #tsparticles {

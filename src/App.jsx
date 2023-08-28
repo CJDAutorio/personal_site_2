@@ -34,6 +34,7 @@ function App() {
 
   return (
     <>
+      <div id='background'></div>
       <div id='pages'>
         <Particles />
         <Landing />

@@ -27,7 +27,7 @@ function Particles() {
             value: '#0e0c0d',
           },
         },
-        fullScreen: false,
+        fullScreen: true,
         fpsLimit: 60,
         interactivity: {
           events: {
@@ -90,9 +90,6 @@ function Particles() {
         detectRetina: true,
       }}
       style={{
-        height: '100%',
-        width: '100%',
-        position: 'relative'
       }}
     />
   )
