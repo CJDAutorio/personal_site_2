@@ -165,6 +165,18 @@
     outline-color: var(--white-color);
 }
 
+#contact-resume {
+    border-radius: 100%;
+}
+
+#contact-resume:hover {
+    /* color: #0077B5; */
+    color: var(--primary-color);
+    outline-offset: 1rem;
+    border-radius: 100%;
+    outline-color: var(--white-color);
+}
+
 @media screen and (max-width: 650px) {
     #contact-grid {
         display: flex;
